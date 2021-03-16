@@ -1,21 +1,17 @@
 const faker = require('faker');
 
-for (let i = 0; i <= 50; i++) {
-  const insert = `INSERT INTO tikjob.usuario
-(
-function_department,
-responsabilities,
-location,
-starting_date,
-hour_week,
-)
-VALUES
-(
-'${faker.name.jobTitle()}',
-'${faker.commerce.productDescription()}',
-'${faker.address.city()},${faker.address.country()}',
-'${faker.date.future()}',
-'hour_week',
-);
+let insert = `INSERT INTO tikjob.ofertas_trabajos (function_department,responsabilities,city,starting_date,hour_week,country) VALUES`;
+
+for (let i = 0; i <= 1; i++) {
+
+  insert += `(
+"${faker.name.jobTitle()}",
+"${faker.commerce.productDescription()}",
+"${faker.address.city()}",
+FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP() - UNIX_TIMESTAMP('2021-01-01')) + UNIX_TIMESTAMP('2025-01-01')),
+40,
+"${faker.address.country()}"),
 `;
+
 }
+console.log(insert);

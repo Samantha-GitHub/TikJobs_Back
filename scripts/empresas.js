@@ -35,6 +35,7 @@ NULL,
 '${faker.random.number()}',
 NULL);`;
   console.log(insert);
+
 }
 
 
