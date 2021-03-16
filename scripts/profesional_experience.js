@@ -1,8 +1,8 @@
 const faker = require('faker');
 
-let insert = `INSERT INTO  tikjob.empresa (employer,job_title,city,country,start_date,end_date,company_link,description) VALUES`;
+let insert = `INSERT INTO tikjob.profesional_experience (employer,job_title,city,country,start_date,end_date,company_link,description) VALUES`;
 
-for (let i = 0; i <= 45; i++) {
+for (let i = 0; i <= 50; i++) {
   insert += `(
 "${faker.company.companyName()}",
 "${faker.name.title()}",
@@ -11,7 +11,7 @@ for (let i = 0; i <= 45; i++) {
 FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP() - UNIX_TIMESTAMP('2020-01-01')) + UNIX_TIMESTAMP('2020-01-01')),
 FROM_UNIXTIME(RAND() * (UNIX_TIMESTAMP() - UNIX_TIMESTAMP('2020-02-01')) + UNIX_TIMESTAMP('2025-12-01')),
 NULL, 
-${faker.hacker.phrase()},
+"${faker.hacker.phrase()}"
 ),
 `;
 }

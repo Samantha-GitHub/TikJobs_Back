@@ -2,7 +2,7 @@
 
 const faker = require('faker');
 
-let insert = `INSERT INTO tikjob.skill (skill) VALUES`;
+let insert = `INSERT INTO tikjob.skills (skill) VALUES`;
 
 for (let i = 0; i <= 50; i++) {
   insert += `

@@ -2,7 +2,7 @@ const faker = require('faker');
 
 let insert = `INSERT INTO tikjob.usuario (firstname,lastname,email,phone,gender,country,city,zipcode,streetName,website,image,video,job_title,profile) VALUES`;
 
-for (let i = 0; i <= 50; i++) {
+for (let i = 0; i <= 30; i++) {
   insert += `(
 "${faker.name.firstName()}",
 "${faker.name.lastName()}",
@@ -18,6 +18,5 @@ NULL,
 NULL,
 "${faker.name.jobTitle()}",
 "${faker.lorem.paragraph()}"),`;
-
-  console.log(insert);
 }
+console.log(insert);
