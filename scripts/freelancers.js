@@ -1,7 +1,7 @@
 const faker = require('faker');
 
 for (let i = 0; i <= 50; i++) {
-  const insert = `INSERT INTO tikjob.usuario
+  const insert = `insert into tikjob.usuario
 (
 firstname,
 lastname,
@@ -22,16 +22,17 @@ VALUES
 ('${faker.name.firstName()}',
 '${faker.name.lastName()}',
 '${faker.internet.email()}',
-'${faker.phone.phone()}',
-'${faker.name.gender()}',
-'${faker.phone.phone()}',
+'${faker.phone.phoneNumberFormat().replace(/\-/g, "")}',
+'M',
 '${faker.address.country()}',
+'${faker.address.city()}',
 '${faker.address.zipCode()}',
 '${faker.address.streetAddress()}',
-'website',
+NULL,
 '${faker.image.avatar()}',
-'video',
+NULL,
 '${faker.name.jobTitle()}',
 '${faker.lorem.paragraph()}');
 `;
+  console.log(insert);
 }

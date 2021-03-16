@@ -2,8 +2,11 @@ const faker = require('faker');
 
 const randomEmail = faker.internet.email();
 
-for (let i = 0; i <= 50; i++) {
-  const insert = `INSERT INTO tikjob.empresa
+
+
+
+for (let i = 0; i <= 45; i++) {
+  const insert = `insert into tikjob.empresa
 (
 name_company,
 phone,
@@ -20,18 +23,20 @@ year_founded)
 VALUES
 (
 '${faker.company.companyName()}',
-'${faker.phone.phoneNumber()}',
-'${faker.finance.account()}',
+'${faker.phone.phoneNumberFormat().replace(/\-/g, "")}', 
+${faker.finance.account()},
 '${faker.address.streetAddress()}',
 '${faker.address.city()}',
-'${faker.address.zipCode()}',
+${faker.address.zipCode()},
 '${faker.address.country()}',
-<{website: }>,
+NULL,
 '${faker.image.business()}',
 '${faker.internet.email()}',
 '${faker.random.number()}',
-'${faker.date.past()}'
-`;
+NULL);`;
+  console.log(insert);
 }
 
-console.log(randomEmail);
+
+/* console.log(randomEmail); */
+
