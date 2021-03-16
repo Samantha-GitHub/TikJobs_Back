@@ -4,6 +4,42 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+const cors = require('cors');
+
+/* Conexion a la BD */
+
+const connect = require('./dbConfig');
+connect()
+
+/*
+  PRUEBA DE CONEXION A LA BD
+*/
+
+/* const mysql = require('mysql');
+const conection = mysql.createConnection({
+  host: '127.0.0.1',
+  user: 'root',
+  password: '',
+  port: 3306,
+  database: 'tikjob'
+});
+
+conection.connect((err) => {
+
+  console.log(err);
+  console.log('Esta conectado');
+
+  conection.query('SELECT * FROM empresa', (err, arr) => {
+    console.log(arr);
+
+  })
+
+}); */
+
+/*
+  FIN PRUEBA DE CONEXION A LA BD
+*/
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
@@ -13,6 +49,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
