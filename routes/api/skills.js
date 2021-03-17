@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getAll } = require('../models/skill');
+const { getAll } = require('../../models/skill');
 
 
 // http://localhost:3000/skills/
