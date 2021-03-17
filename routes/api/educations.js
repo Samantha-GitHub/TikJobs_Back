@@ -2,26 +2,26 @@ const {
   create,
   updateById,
   deleteById,
-  getCoursesByIdFreelance,
-} = require('../../models/course');
+  getEducationsByIdFreelance,
+} = require('../../models/education');
 
 const router = require('express').Router();
 
-// Recupera todos los courses de un freelance y devuelve JSON
+// Recupera todos los educations de un freelance y devuelve JSON
 router.get('/', async (req, res) => {
-  // Id de company inyectado por el Middleware checkToken!
+  // Id de education inyectado por el Middleware checkToken!
   // console.log(req.courseId);
 
   try {
-    const course = await getCoursesByIdFreelance();
-    res.json(course);
+    const education = await getEducationsByIdFreelance();
+    res.json(education);
   } catch (error) {
     res.json({ error: error.message });
   }
 });
 
-// Crear un nuevo course
-// Los datos para crear el course, me llegan a través del BODY
+// Crear un nuevo Education
+// Los datos para crear el Education, me llegan a través del BODY
 router.post('/', async (req, res) => {
   try {
     const result = await create(req.body);
@@ -31,17 +31,17 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Borro un Course
-router.delete('/:idCourse', async (req, res) => {
+// Borro un Education
+router.delete('/:idEducation', async (req, res) => {
   try {
-    const result = await deleteById(req.params.idCourse);
+    const result = await deleteById(req.params.idEducation);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });
   }
 });
 
-// Actualizo un Course
+// Actualizo un Education
 router.put('/', async (req, res) => {
   try {
     const result = await updateById(req.body);

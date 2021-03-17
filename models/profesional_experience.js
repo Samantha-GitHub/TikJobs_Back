@@ -1,8 +1,8 @@
-// ALL educationS from a freelance
-const getEducationsByIdFreelance = (pId) => {
+// ALL profesioanl experiences from a freelance
+const getProfesionalExperienceByIdFreelance = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT education.* FROM education, usuario WHERE usuario.id = education.fk_usuario AND usuario.id = ?',
+      'SELECT profesional_experience.* FROM profesional_experience, usuario WHERE usuario.id = education.fk_usuario AND usuario.id = ?',
       [pId],
       (err, rows) => {
         if (err) {
@@ -15,7 +15,7 @@ const getEducationsByIdFreelance = (pId) => {
   });
 };
 
-// NEW education
+// NEW profesional_experience
 const create = ({ degree, school, city, country, start_date, end_date }) => {
   return new Promise((resolve, reject) => {
     db.query(
@@ -29,7 +29,7 @@ const create = ({ degree, school, city, country, start_date, end_date }) => {
   });
 };
 
-// UPDATE education
+// UPDATE profesional_experience
 const updateById = ({
   id,
   degree,
@@ -51,7 +51,7 @@ const updateById = ({
   });
 };
 
-// DELETE education
+// DELETE profesional_experience
 const deleteById = (pId) => {
   return new Promise((resolve, reject) => {
     db.query('DELETE from education WHERE id = ?', [pId], (err, result) => {
@@ -65,5 +65,5 @@ module.exports = {
   create,
   updateById,
   deleteById,
-  getEducationsByIdFreelance,
+  getProfesionalExperienceByIdFreelance,
 };
