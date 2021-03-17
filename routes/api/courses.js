@@ -1,27 +1,27 @@
 const {
-  getCoursesByIdFreelance,
+  getAll,
   create,
   deleteById,
   updateById,
-} = require('../../models/oferta');
+} = require('../../models/course');
 
 const router = require('express').Router();
 
-// Recupera todos los job offers y devuelve JSON
+// Recupera todos los courses y devuelve JSON
 router.get('/', async (req, res) => {
-  // Id de job Offer inyectado por el Middleware checkToken!
-  // console.log(req.job_offerId);
+  // Id de company inyectado por el Middleware checkToken!
+  // console.log(req.courseId);
 
   try {
-    const jobOffer = await getCoursesByIdFreelance();
-    res.json(jobOffer);
+    const course = await getAll();
+    res.json(course);
   } catch (error) {
     res.json({ error: error.message });
   }
 });
 
-// Crear un nuevo job offer
-// Los datos para crear job offer, me llegan a través del BODY
+// Crear un nuevo course
+// Los datos para crear el course, me llegan a través del BODY
 router.post('/', async (req, res) => {
   try {
     const result = await create(req.body);
@@ -31,17 +31,17 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Borro un job offer
-router.delete('/:idJob_offer', async (req, res) => {
+// Borro un Course
+router.delete('/:idCourse', async (req, res) => {
   try {
-    const result = await deleteById(req.params.idJob_offer);
+    const result = await deleteById(req.params.idCourse);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });
   }
 });
 
-// Actualizo un job offers\
+// Actualizo un Course
 router.put('/', async (req, res) => {
   try {
     const result = await updateById(req.body);
