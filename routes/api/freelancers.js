@@ -1,25 +1,28 @@
 const router = require('express').Router();
 const { getAll } = require('../../models/freelancer');
 
-// http://localhost:3000/freelancer/
+// Recupera todos los clientes y devuelve JSON
+router.get('/', async (req, res) => {
+  // Id de usuario inyectado por el Middleware checkToken!
+  // console.log(req.userId);
 
-// all freelancers
-router.get('/', async (req, res, next) => {
   try {
-    const getAllUsuarios = await getAll();
-    res.json(getAllUsuarios);
+    const freelancer = await getAll();
+    res.json(freelancer);
   } catch (error) {
     res.json({ error: error.message });
   }
 });
 
-// http://localhost:3000/freelancer/new
-
-// freelancer info needed
-
-router.get('/new', (req, res) => {
-  // Renderizar una vista (form.pug) que reprensente cada uno de los campos necesarios para crear un freelancer
-  res.render('freelancer/form');
+// Crear un nuevo cliente
+// Los datos para crear el cliente, me llegan a través del BODY
+router.post('/', async (req, res) => {
+  try {
+    const result = await create(req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(422).json({ error: error.message });
+  }
 });
 
 // http://localhost:3000/freelancer/create
