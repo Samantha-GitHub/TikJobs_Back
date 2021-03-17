@@ -9,7 +9,7 @@ const cors = require('cors');
 /* Conexion a la BD */
 
 const connect = require('./dbConfig');
-connect()
+connect();
 
 /*
   PRUEBA DE CONEXION A LA BD
@@ -43,7 +43,6 @@ conection.connect((err) => {
 const indexRouter = require('./routes/index');
 const usuariosRouter = require('./routes/usuarios');
 
-
 const app = express();
 
 // view engine setup
@@ -58,7 +57,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usuariosRouter);
+app.use('/freelancer', usuariosRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
