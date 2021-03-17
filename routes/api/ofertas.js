@@ -3,7 +3,7 @@ const {
   create,
   deleteById,
   updateById,
-} = require('../../models/ofertas');
+} = require('../../models/oferta');
 
 const router = require('express').Router();
 
