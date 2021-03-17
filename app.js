@@ -9,7 +9,7 @@ const cors = require('cors');
 /* Conexion a la BD */
 
 const connect = require('./dbConfig');
-connect()
+connect();
 
 /*
   PRUEBA DE CONEXION A LA BD
@@ -46,9 +46,6 @@ const empresasRouter = require('./routes/empresas');
 const skillsRouter = require('./routes/skills');
 const ofertasRouter = require('./routes/ofertas');
 
-
-
-
 const app = express();
 
 // view engine setup
@@ -63,13 +60,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/freelances', freelancersRouter);
-app.use('/company', empresasRouter);
-app.use('/skills', skillsRouter);
-app.use('/job_offers', ofertasRouter);
-
-
-
+app.use('/freelancer', usuariosRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
