@@ -1,14 +1,15 @@
 const router = require('express').Router();
-const { getAll } = require('../models/usuario');
+const { getAll } = require('../models/empresa');
 
 
-// http://localhost:3000/users/
+
+// http://localhost:3000/company/
 
 router.get('/', async (req, res, next) => {
 
     try {
-        const getAllUsuarios = await getAll();
-        res.json(getAllUsuarios);
+        const getAllEmpresas = await getAll();
+        res.json(getAllEmpresas);
 
     } catch (error) {
 

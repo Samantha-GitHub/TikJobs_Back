@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const { getAll } = require('../models/usuario');
+const { getAll } = require('../models/skill');
 
 
-// http://localhost:3000/users/
+// http://localhost:3000/skills/
 
 router.get('/', async (req, res, next) => {
 
