@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const { getAll } = require('../../models/freelancer');
 
-// Recupera todos los clientes y devuelve JSON
+// Recupera todos los freelancers y devuelve JSON
 router.get('/', async (req, res) => {
-  // Id de usuario inyectado por el Middleware checkToken!
+  // Id de freelancer inyectado por el Middleware checkToken!
   // console.log(req.userId);
 
   try {
@@ -14,8 +14,8 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Crear un nuevo cliente
-// Los datos para crear el cliente, me llegan a través del BODY
+// Crear un nuevo freelancer
+// Los datos para crear el freelancer, me llegan a través del BODY
 router.post('/', async (req, res) => {
   try {
     const result = await create(req.body);
@@ -25,22 +25,24 @@ router.post('/', async (req, res) => {
   }
 });
 
-// http://localhost:3000/freelancer/create
-
-// /freelancer/create
-router.post('/create', async (req, res) => {
-  console.log(req.body);
-  const result = await create(req.body);
-  console.log(result);
-  res.redirect('/freelancer');
+// Borro un freelancer
+router.delete('/:idFreelancer', async (req, res) => {
+  try {
+    const result = await deleteById(req.params.idFreelancer);
+    res.json(result);
+  } catch (error) {
+    res.status(422).json({ error: error.message });
+  }
 });
 
-// http://localhost:3000/freelancer/edit/:idFreelancer
-
-// /clientes/edit/7
-router.get('/edit/:idFreelancer', async (req, res) => {
-  const cliente = await getById(req.params.idFreelancer);
-  res.render('clientes/formularioEdit', { freelancer });
+// Actualizo un freelancer
+router.put('/', async (req, res) => {
+  try {
+    const result = await updateById(req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(422).json({ error: error.message });
+  }
 });
 
 //GET http://localhost:3000/users/userId
