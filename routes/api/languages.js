@@ -3,53 +3,53 @@ const {
   create,
   updateById,
   deleteById,
-  getSkillsByIdFreelance,
-  getSkillsByIdJobsOffers,
-} = require('../../models/skill');
+  getLanguagesByIdFreelance,
+  getLanguagesByIdJobsOffers,
+} = require('../../models/languages');
 
 const router = require('express').Router();
 
-// Recupera todos los skills y devuelve JSON
+// Recupera todos los languages y devuelve JSON
 router.get('/', async (req, res) => {
   // Id de skill inyectado por el Middleware checkToken!
   // console.log(req.job_skillId);
 
   try {
-    const skills = await getAll();
-    res.json(skills);
+    const languages = await getAll();
+    res.json(languages);
   } catch (error) {
     res.json({ error: error.message });
   }
 });
 
-// Recupera todos los skills de un freelance y devuelve JSON
+// Recupera todos los languages de un freelance y devuelve JSON
 router.get('/', async (req, res) => {
   // Id de skill inyectado por el Middleware checkToken!
   // console.log(req.job_skillId);
 
   try {
-    const skills = await getSkillsByIdFreelance();
-    res.json(skills);
+    const languages = await getLanguagesByIdFreelance();
+    res.json(languages);
   } catch (error) {
     res.json({ error: error.message });
   }
 });
 
-// Recupera todos los skills de un job offer y devuelve JSON
+// Recupera todos los languages de ub job offer y devuelve JSON
 router.get('/', async (req, res) => {
   // Id de skill inyectado por el Middleware checkToken!
   // console.log(req.job_skillId);
 
   try {
-    const skills = await getSkillsByIdJobsOffers();
-    res.json(skills);
+    const languages = await getLanguagesByIdJobsOffers();
+    res.json(languages);
   } catch (error) {
     res.json({ error: error.message });
   }
 });
 
-// Crear un nuevo skill
-// Los datos para crear skill, me llegan a través del BODY
+// Crear un nuevo languages
+// Los datos para crear languages, me llegan a través del BODY
 router.post('/', async (req, res) => {
   try {
     const result = await create(req.body);
@@ -59,17 +59,17 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Borro un skill
-router.delete('/:idSkill', async (req, res) => {
+// Borro un languages
+router.delete('/:idLanguages', async (req, res) => {
   try {
-    const result = await deleteById(req.params.idSkill);
+    const result = await deleteById(req.params.idLanguages);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });
   }
 });
 
-// Actualizo un skills\
+// Actualizo un languages
 router.put('/', async (req, res) => {
   try {
     const result = await updateById(req.body);

@@ -8,6 +8,7 @@ const ofertasApiRouter = require('./api/ofertas');
 const coursesApiRouter = require('./api/courses');
 const educationsApiRouter = require('./api/educations');
 const profesionalExperienceApiRouter = require('./api/profesional_experience');
+const languagesApiRouter = require('./api/languages');
 
 router.use('/freelancers', freelancersApiRouter);
 router.use('/companies', empresasApiRouter);
@@ -16,5 +17,6 @@ router.use('/job_offers', ofertasApiRouter);
 router.use('/courses', coursesApiRouter);
 router.use('/educations', educationsApiRouter);
 router.use('/profesional_experience', profesionalExperienceApiRouter);
+router.use('/languages', languagesApiRouter);
 
 module.exports = router;

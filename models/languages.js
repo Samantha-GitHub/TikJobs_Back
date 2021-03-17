@@ -1,7 +1,7 @@
-// ALL skills
+// ALL languages
 const getAll = () => {
   return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM skills', (err, rows) => {
+    db.query('SELECT * FROM languages', (err, rows) => {
       if (err) {
         return reject(err);
       } else {
@@ -10,11 +10,11 @@ const getAll = () => {
     });
   });
 };
-// ALL skills from a freelance
-const getSkillsByIdFreelance = (pId) => {
+// ALL languages from a freelance
+const getLanguagesByIdFreelance = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT skills.* FROM skills, usuario WHERE usuario.id = skills.fk_usuario AND usuario.id = ?',
+      'SELECT languages.* FROM languages, usuario WHERE usuario.id = languages.fk_usuario AND usuario.id = ?',
       [pId],
       (err, rows) => {
         if (err) {
@@ -26,11 +26,11 @@ const getSkillsByIdFreelance = (pId) => {
     );
   });
 };
-// ALL skills from a job offer
-const getSkillsByIdJobsOffers = (pId) => {
+// ALL languages from a job offer
+const getLanguagesByIdJobsOffers = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT skills.* FROM skills, ofertas_trabajos WHERE ofertas_trabajos.id = skills.fk_ofertas_trabajos AND ofertas_trabajos.id = ?',
+      'SELECT languages.* FROM languages, ofertas_trabajos WHERE ofertas_trabajos.id = languages.fk_ofertas_trabajos AND ofertas_trabajos.id = ?',
       [pId],
       (err, rows) => {
         if (err) {
@@ -47,8 +47,8 @@ const getSkillsByIdJobsOffers = (pId) => {
 const create = ({ skill }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'INSERT INTO skills (skill) VALUES (?)',
-      [skill],
+      'INSERT INTO languages (skill) VALUES (?)',
+      [languages],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);
@@ -61,8 +61,8 @@ const create = ({ skill }) => {
 const updateById = ({ id, skill }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE skills set skill = ?,  WHERE id = ?',
-      [skill, id],
+      'UPDATE languages set languages = ?,  WHERE id = ?',
+      [languages, id],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);
@@ -74,7 +74,7 @@ const updateById = ({ id, skill }) => {
 // DELETE skill
 const deleteById = (pId) => {
   return new Promise((resolve, reject) => {
-    db.query('DELETE from skills WHERE id = ?', [pId], (err, result) => {
+    db.query('DELETE from languages WHERE id = ?', [pId], (err, result) => {
       if (err) return reject(err);
       resolve(result);
     });
@@ -86,6 +86,6 @@ module.exports = {
   create,
   updateById,
   deleteById,
-  getSkillsByIdFreelance,
-  getSkillsByIdJobsOffers,
+  getLanguagesByIdFreelance,
+  getLanguagesByIdJobsOffers,
 };
