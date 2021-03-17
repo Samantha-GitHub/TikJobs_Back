@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getAll } = require('../models/oferta');
+const { getAll } = require('../../models/oferta');
 
 // http://localhost:3000/freelancer/
 

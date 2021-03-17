@@ -41,10 +41,9 @@ conection.connect((err) => {
 */
 
 const indexRouter = require('./routes/index');
-const freelancersRouter = require('./routes/freelancers');
-const empresasRouter = require('./routes/empresas');
-const skillsRouter = require('./routes/skills');
-const ofertasRouter = require('./routes/ofertas');
+// RUTAS API
+const apiRouter = require('./routes/api');
+// RUTAS BACKEND
 
 const app = express();
 
@@ -60,7 +59,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/freelancer', usuariosRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
