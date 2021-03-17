@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { getAll } = require('../models/freelancer');
 
 
-// http://localhost:3000/users/
+//GET http://localhost:3000/users/
 
 router.get('/', async (req, res, next) => {
 
@@ -18,4 +18,19 @@ router.get('/', async (req, res, next) => {
 
 });
 
+//GET http://localhost:3000/users/userId
+
+//POST http://localhost:3000/users
+
+//PUT http://localhost:3000/users/userId
+
+//DELETE http://localhost:3000/users/userId
+
+
+
+
 module.exports = router;
+
+
+
+
