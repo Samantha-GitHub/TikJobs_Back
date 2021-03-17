@@ -7,8 +7,8 @@ const skillsApiRouter = require('./api/skills');
 const ofertasApiRouter = require('./api/ofertas');
 
 router.use('/freelancers', freelancersApiRouter);
-router.use('/empresas', empresasApiRouter);
+router.use('/companies', empresasApiRouter);
 router.use('/skills', skillsApiRouter);
-router.use('/ofertas', ofertasApiRouter);
+router.use('/job_offers', ofertasApiRouter);
 
 module.exports = router;

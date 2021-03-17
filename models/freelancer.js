@@ -57,6 +57,7 @@ const create = ({
 
 // UPDATE FREELANCER
 const updateById = ({
+  id,
   firstname,
   lastname,
   email,
@@ -90,6 +91,7 @@ const updateById = ({
         video,
         job_title,
         profile,
+        id,
       ],
       (err, result) => {
         if (err) return reject(err);

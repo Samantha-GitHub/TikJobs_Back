@@ -1,33 +1,62 @@
+const {
+  getAll,
+  create,
+  deleteById,
+  updateById,
+} = require('../../models/ofertas');
+
 const router = require('express').Router();
-const { getAll } = require('../../models/oferta');
 
-// http://localhost:3000/freelancer/
+// Recupera todos los freelancers y devuelve JSON
+router.get('/', async (req, res) => {
+  // Id de freelancer inyectado por el Middleware checkToken!
+  // console.log(req.userId);
 
-// all freelancers
-router.get('/', async (req, res, next) => {
   try {
-    const getAllUsuarios = await getAll();
-    res.json(getAllUsuarios);
+    const freelancer = await getAll();
+    res.json(freelancer);
   } catch (error) {
     res.json({ error: error.message });
   }
 });
 
-// freelancer info needed
-// http://localhost:3000/freelancer/new
-
-router.get('/new', (req, res) => {
-  // Renderizar una vista (form.pug) que reprensente cada uno de los campos necesarios para crear un freelancer
-  res.render('freelancer/form');
+// Crear un nuevo freelancer
+// Los datos para crear el freelancer, me llegan a través del BODY
+router.post('/', async (req, res) => {
+  try {
+    const result = await create(req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(422).json({ error: error.message });
+  }
 });
 
-// /clientes/create
-// http://localhost:3000/freelancer/create
-router.post('/create', async (req, res) => {
-  console.log(req.body);
-  const result = await create(req.body);
-  console.log(result);
-  res.redirect('/new');
+// Borro un freelancer
+router.delete('/:idFreelancer', async (req, res) => {
+  try {
+    const result = await deleteById(req.params.idFreelancer);
+    res.json(result);
+  } catch (error) {
+    res.status(422).json({ error: error.message });
+  }
 });
+
+// Actualizo un freelancer
+router.put('/', async (req, res) => {
+  try {
+    const result = await updateById(req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(422).json({ error: error.message });
+  }
+});
+
+//GET http://localhost:3000/users/userId
+
+//POST http://localhost:3000/users
+
+//PUT http://localhost:3000/users/userId
+
+//DELETE http://localhost:3000/users/userId
 
 module.exports = router;
