@@ -41,7 +41,7 @@ conection.connect((err) => {
 */
 
 const indexRouter = require('./routes/index');
-const usuariosRouter = require('./routes/usuarios');
+const freelancersRouter = require('./routes/freelancers');
 const empresasRouter = require('./routes/empresas');
 const skillsRouter = require('./routes/skills');
 const ofertasRouter = require('./routes/ofertas');
@@ -63,7 +63,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usuariosRouter);
+app.use('/users', freelancersRouter);
 app.use('/company', empresasRouter);
 app.use('/skills', skillsRouter);
 app.use('/job_offers', ofertasRouter);
