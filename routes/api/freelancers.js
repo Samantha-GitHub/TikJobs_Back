@@ -1,5 +1,11 @@
+const {
+  getAll,
+  create,
+  deleteById,
+  updateById,
+} = require('../../models/freelancer');
+
 const router = require('express').Router();
-const { getAll } = require('../../models/freelancer');
 
 // Recupera todos los freelancers y devuelve JSON
 router.get('/', async (req, res) => {
