@@ -15,16 +15,6 @@ const getEducationsByIdFreelance = (pId) => {
   });
 };
 
-// Recupera UN unico job offer by ID
-router.get('/:idCompany', async (req, res) => {
-  try {
-    const company = await getById(req.params.idCompany);
-    res.json(company);
-  } catch (error) {
-    res.json({ error: error.message });
-  }
-});
-
 // NEW education
 const create = ({ degree, school, city, country, start_date, end_date }) => {
   return new Promise((resolve, reject) => {
