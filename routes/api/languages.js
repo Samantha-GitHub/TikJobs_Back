@@ -36,12 +36,12 @@ router.get('/:pId', async (req, res) => {
 });
 
 // Recupera todos los languages de ub job offer y devuelve JSON
-router.get('/', async (req, res) => {
+router.get('/:pId', async (req, res) => {
   // Id de skill inyectado por el Middleware checkToken!
   // console.log(req.job_skillId);
 
   try {
-    const languages = await getLanguagesByIdJobsOffers();
+    const languages = await getLanguagesByIdJobsOffers(req.params.pId);
     res.json(languages);
   } catch (error) {
     res.json({ error: error.message });

@@ -36,12 +36,12 @@ router.get('/:pId', async (req, res) => {
 });
 
 // Recupera todos los skills de un job offer y devuelve JSON
-router.get('/', async (req, res) => {
+router.get('/:pId', async (req, res) => {
   // Id de skill inyectado por el Middleware checkToken!
   // console.log(req.job_skillId);
 
   try {
-    const skills = await getSkillsByIdJobsOffers();
+    const skills = await getSkillsByIdJobsOffers(req.params.pId);
     res.json(skills);
   } catch (error) {
     res.json({ error: error.message });
