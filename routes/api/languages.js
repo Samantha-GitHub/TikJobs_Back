@@ -23,12 +23,12 @@ router.get('/', async (req, res) => {
 });
 
 // Recupera todos los languages de un freelance y devuelve JSON
-router.get('/', async (req, res) => {
+router.get('/:pId', async (req, res) => {
   // Id de skill inyectado por el Middleware checkToken!
   // console.log(req.job_skillId);
 
   try {
-    const languages = await getLanguagesByIdFreelance();
+    const languages = await getLanguagesByIdFreelance(req.params.pId);
     res.json(languages);
   } catch (error) {
     res.json({ error: error.message });
