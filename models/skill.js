@@ -10,11 +10,12 @@ const getAll = () => {
     });
   });
 };
+
 // ALL skills from a freelance
 const getSkillsByIdFreelance = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT skills.* FROM skills, usuario WHERE usuario.id = skills.fk_usuario AND usuario.id = ?',
+      'SELECT skills.skill FROM tbi_skills_usuario JOIN skills ON skills.id = tbi_skills_usuario.fk_skill JOIN usuario ON usuario.id = tbi_skills_usuario.fk_usuario WHERE usuario.id=?;',
       [pId],
       (err, rows) => {
         if (err) {
@@ -30,7 +31,7 @@ const getSkillsByIdFreelance = (pId) => {
 const getSkillsByIdJobsOffers = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT skills.* FROM skills, ofertas_trabajos WHERE ofertas_trabajos.id = skills.fk_ofertas_trabajos AND ofertas_trabajos.id = ?',
+      'SELECT skills.skill FROM tbi_skills_ofertas_trabajos JOIN skills ON skills.id = tbi_skills_ofertas_trabajos.fk_skill JOIN fertas_trabajos ON ofertas_trabajos.id = tbi_skills_ofertas_trabajos.fk_oferta_trabajo WHERE ofertas_trabajos.id = ?;',
       [pId],
       (err, rows) => {
         if (err) {

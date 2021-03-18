@@ -10,11 +10,12 @@ const getAll = () => {
     });
   });
 };
+
 // ALL languages from a freelance
 const getLanguagesByIdFreelance = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT languages.* FROM languages, usuario WHERE usuario.id = languages.fk_usuario AND usuario.id = ?',
+      'SELECT languages.language FROM tbi_languages_usuario JOIN languages ON languages.id = tbi_languages_usuario.fk_languages JOIN usuario ON usuario.id = tbi_languages_usuario.fk_usuario WHERE usuario.id = ?;',
       [pId],
       (err, rows) => {
         if (err) {
@@ -26,11 +27,12 @@ const getLanguagesByIdFreelance = (pId) => {
     );
   });
 };
+
 // ALL languages from a job offer
 const getLanguagesByIdJobsOffers = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT languages.* FROM languages, ofertas_trabajos WHERE ofertas_trabajos.id = languages.fk_ofertas_trabajos AND ofertas_trabajos.id = ?',
+      'SELECT languages.language FROM tbi_languages_ofertas_trabajos JOIN languages ON languages.id = tbi_languages_ofertas_trabajos.fk_languages JOIN ofertas_trabajos ON ofertas_trabajos.id = tbi_languages_ofertas_trabajos.fk_ofertas_trabajos WHERE ofertas_trabajos.id = ?;',
       [pId],
       (err, rows) => {
         if (err) {
