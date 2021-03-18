@@ -10,6 +10,7 @@ const getAll = () => {
     });
   });
 };
+
 // ALL skills from a freelance
 const getSkillsByIdFreelance = (pId) => {
   return new Promise((resolve, reject) => {
@@ -26,6 +27,7 @@ const getSkillsByIdFreelance = (pId) => {
     );
   });
 };
+
 // ALL skills from a job offer
 const getSkillsByIdJobsOffers = (pId) => {
   return new Promise((resolve, reject) => {

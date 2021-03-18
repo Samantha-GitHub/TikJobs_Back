@@ -26,6 +26,7 @@ const getLanguagesByIdFreelance = (pId) => {
     );
   });
 };
+
 // ALL languages from a job offer
 const getLanguagesByIdJobsOffers = (pId) => {
   return new Promise((resolve, reject) => {
