@@ -8,12 +8,12 @@ const {
 const router = require('express').Router();
 
 // Recupera todos los Profesional Experiences y devuelve JSON
-router.get('/', async (req, res) => {
+router.get('/:pId', async (req, res) => {
   // Id de Profesional Experience inyectado por el Middleware checkToken!
   // console.log(req.job_offerId);
 
   try {
-    const profesionalExperience = await getProfesionalExperienceByIdFreelance();
+    const profesionalExperience = await getProfesionalExperienceByIdFreelance(req.params.pId);
     res.json(profesionalExperience);
   } catch (error) {
     res.json({ error: error.message });

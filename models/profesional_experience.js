@@ -2,7 +2,7 @@
 const getProfesionalExperienceByIdFreelance = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT profesional_experience.* FROM profesional_experience, usuario WHERE usuario.id = education.fk_usuario AND usuario.id = ?',
+      'SELECT profesional_experience.* FROM profesional_experience, usuario WHERE usuario.id = profesional_experience.fk_usuario AND usuario.id = ?',
       [pId],
       (err, rows) => {
         if (err) {
