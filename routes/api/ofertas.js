@@ -1,5 +1,5 @@
 const {
-  getCoursesByIdFreelance,
+  getAll,
   create,
   deleteById,
   updateById,
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
   // console.log(req.job_offerId);
 
   try {
-    const jobOffer = await getCoursesByIdFreelance();
+    const jobOffer = await getAll();
     res.json(jobOffer);
   } catch (error) {
     res.json({ error: error.message });
