@@ -3,6 +3,7 @@ const {
   create,
   deleteById,
   updateById,
+  getById
 } = require('../../models/freelancer');
 
 const router = require('express').Router();
@@ -14,6 +15,17 @@ router.get('/', async (req, res) => {
 
   try {
     const freelancer = await getAll();
+    res.json(freelancer);
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
+
+// Recupera UN unico freelancers by ID
+router.get('/:idFreelancer', async (req, res) => {
+
+  try {
+    const freelancer = await getById(req.params.idFreelancer);
     res.json(freelancer);
   } catch (error) {
     res.json({ error: error.message });

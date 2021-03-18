@@ -11,6 +11,19 @@ const getAll = () => {
   });
 };
 
+// GET FREELANCERS BY ID
+const getById = (pId) => {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM usuario WHERE usuario.id = ?', [pId], (err, rows) => {
+      if (err) {
+        return reject(err);
+      } else {
+        resolve(rows[0]);
+      }
+    });
+  });
+};
+
 // NEW FREELANCE
 const create = ({
   firstname,
@@ -116,4 +129,5 @@ module.exports = {
   create,
   updateById,
   deleteById,
+  getById
 };
