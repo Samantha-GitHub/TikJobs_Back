@@ -11,6 +11,23 @@ const getAll = () => {
   });
 };
 
+// GET Company BY ID
+const getById = (pId) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'SELECT * FROM empresa WHERE usuario.id = ?',
+      [pId],
+      (err, rows) => {
+        if (err) {
+          return reject(err);
+        } else {
+          resolve(rows[0]);
+        }
+      }
+    );
+  });
+};
+
 // NEW COMPANY
 const create = ({
   name_company,
@@ -108,4 +125,5 @@ module.exports = {
   create,
   updateById,
   deleteById,
+  getById,
 };

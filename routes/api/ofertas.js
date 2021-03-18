@@ -3,6 +3,7 @@ const {
   create,
   deleteById,
   updateById,
+  getById,
 } = require('../../models/oferta');
 
 const router = require('express').Router();
@@ -14,6 +15,16 @@ router.get('/', async (req, res) => {
 
   try {
     const jobOffer = await getAll();
+    res.json(jobOffer);
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
+
+// Recupera UN unico job offer by ID
+router.get('/:idJobOffer', async (req, res) => {
+  try {
+    const jobOffer = await getById(req.params.idJobOffer);
     res.json(jobOffer);
   } catch (error) {
     res.json({ error: error.message });

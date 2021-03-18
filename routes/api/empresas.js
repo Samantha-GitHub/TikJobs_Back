@@ -3,6 +3,7 @@ const {
   create,
   deleteById,
   updateById,
+  getById,
 } = require('../../models/empresa');
 
 const router = require('express').Router();

@@ -11,6 +11,23 @@ const getAll = () => {
   });
 };
 
+// GET Job Offer BY ID
+const getById = (pId) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'SELECT * FROM ofertas_trabajos WHERE usuario.id = ?',
+      [pId],
+      (err, rows) => {
+        if (err) {
+          return reject(err);
+        } else {
+          resolve(rows[0]);
+        }
+      }
+    );
+  });
+};
+
 // NEW COMPANY
 const create = ({
   function_department,
@@ -88,4 +105,5 @@ module.exports = {
   create,
   updateById,
   deleteById,
+  getById,
 };
