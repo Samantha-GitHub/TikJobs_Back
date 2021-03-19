@@ -21,6 +21,17 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Recupera UNA unica empresa by ID
+router.get('/:idCompany', async (req, res) => {
+
+  try {
+    const freelancer = await getById(req.params.idCompany);
+    res.json(freelancer);
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
+
 // Crear un nuevo company
 // Los datos para crear el company, me llegan a través del BODY
 router.post('/', async (req, res) => {
