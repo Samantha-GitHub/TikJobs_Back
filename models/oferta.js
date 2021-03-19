@@ -15,13 +15,13 @@ const getAll = () => {
 const getById = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT * FROM ofertas_trabajos WHERE usuario.id = ?',
+      'SELECT * FROM ofertas_trabajos WHERE ofertas_trabajos.id = ?',
       [pId],
       (err, rows) => {
         if (err) {
           return reject(err);
         } else {
-          resolve(rows);
+          resolve(rows[0]);
         }
       }
     );
