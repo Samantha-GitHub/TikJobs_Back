@@ -28,7 +28,24 @@ const getById = (pId) => {
   });
 };
 
-// NEW COMPANY
+// ALL JobOffers from a company
+const getJobOfferByIdCompany = (pId) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'SELECT ofertas_trabajos.* FROM ofertas_trabajos, empresa WHERE empresa.id = ofertas_trabajos.fk_empresa AND empresa.id = ?',
+      [pId],
+      (err, rows) => {
+        if (err) {
+          return reject(err);
+        } else {
+          resolve(rows);
+        }
+      }
+    );
+  });
+};
+
+// NEW JOB OFFER
 const create = ({
   function_department,
   responsabilities,
@@ -56,7 +73,7 @@ const create = ({
   });
 };
 
-// UPDATE COMPANY
+// UPDATE JOB OFFER
 const updateById = ({
   id,
   function_department,
@@ -86,7 +103,7 @@ const updateById = ({
   });
 };
 
-// DELETE COMPANIES
+// DELETE JOB OFFER
 const deleteById = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
@@ -106,4 +123,5 @@ module.exports = {
   updateById,
   deleteById,
   getById,
+  getJobOfferByIdCompany,
 };

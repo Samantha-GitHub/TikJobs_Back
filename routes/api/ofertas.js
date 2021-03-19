@@ -4,6 +4,7 @@ const {
   deleteById,
   updateById,
   getById,
+  getJobOfferByIdCompany,
 } = require('../../models/oferta');
 
 const router = require('express').Router();
@@ -25,6 +26,19 @@ router.get('/', async (req, res) => {
 router.get('/:idJobOffer', async (req, res) => {
   try {
     const jobOffer = await getById(req.params.idJobOffer);
+    res.json(jobOffer);
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
+
+// Recupera todos los JOB OFFER de un company y devuelve JSON
+router.get('/:pId', async (req, res) => {
+  // Id de company inyectado por el Middleware checkToken!
+  // console.log(req.courseId);
+
+  try {
+    const jobOffer = await getJobOfferByIdCompany(req.params.pId);
     res.json(jobOffer);
   } catch (error) {
     res.json({ error: error.message });

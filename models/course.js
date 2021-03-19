@@ -1,4 +1,3 @@
-// HOW TO CREATE A METHOD THAT RELATES COURSE WITH FREELANCER
 // ALL COURSES from a freelance
 const getCoursesByIdFreelance = (pId) => {
   return new Promise((resolve, reject) => {
