@@ -28,23 +28,6 @@ const getById = (pId) => {
   });
 };
 
-// ALL JobOffers from a company
-const getJobOfferByIdCompany = (pId) => {
-  return new Promise((resolve, reject) => {
-    db.query(
-      'SELECT ofertas_trabajos.* FROM ofertas_trabajos, empresa WHERE empresa.id = ofertas_trabajos.fk_empresa AND empresa.id = ?',
-      [pId],
-      (err, rows) => {
-        if (err) {
-          return reject(err);
-        } else {
-          resolve(rows);
-        }
-      }
-    );
-  });
-};
-
 // NEW JOB OFFER
 const create = ({
   function_department,
@@ -123,5 +106,4 @@ module.exports = {
   updateById,
   deleteById,
   getById,
-  getJobOfferByIdCompany,
 };
