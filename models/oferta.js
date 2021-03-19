@@ -21,7 +21,7 @@ const getById = (pId) => {
         if (err) {
           return reject(err);
         } else {
-          resolve(rows[0]);
+          resolve(rows);
         }
       }
     );
