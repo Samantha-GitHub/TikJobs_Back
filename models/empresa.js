@@ -28,6 +28,23 @@ const getById = (pId) => {
   });
 };
 
+// GET Detalle del a Empresa que ha publicado una oferta
+/* const getCompanyDetailByJobOffer = (pId) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'SELECT empresa.* FROM empresa, ofertas_trabajos WHERE empresa.id = ofertas_trabajos.fk_empresa AND ofertas_trabajos.id = ?',
+      [pId],
+      (err, rows) => {
+        if (err) {
+          return reject(err);
+        } else {
+          resolve(rows[0]);
+        }
+      }
+    );
+  });
+}; */
+
 // ALL JobOffers from a company
 const getJobOfferByIdCompany = (pId) => {
   return new Promise((resolve, reject) => {
@@ -144,4 +161,5 @@ module.exports = {
   deleteById,
   getById,
   getJobOfferByIdCompany,
+  /* getCompanyDetailByJobOffer */
 };

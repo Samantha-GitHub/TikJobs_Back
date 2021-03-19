@@ -28,6 +28,9 @@ const getById = (pId) => {
   });
 };
 
+
+
+
 // NEW JOB OFFER
 const create = ({
   function_department,
@@ -106,4 +109,5 @@ module.exports = {
   updateById,
   deleteById,
   getById,
+
 };

@@ -33,6 +33,10 @@ router.get('/:idJobOffer', async (req, res) => {
 
 
 
+
+
+
+
 // Crear un nuevo job offer
 // Los datos para crear job offer, me llegan a través del BODY
 router.post('/', async (req, res) => {
