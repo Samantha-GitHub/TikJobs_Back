@@ -4,6 +4,8 @@ const {
   deleteById,
   updateById,
   getById,
+  getByCountry,
+  searchData,
 } = require('../../models/oferta');
 
 const router = require('express').Router();
@@ -31,11 +33,26 @@ router.get('/:idJobOffer', async (req, res) => {
   }
 });
 
+// Recupera job offers by COUNTRY
+// router.get('/joboffer/:name', async (req, res) => {
+//   try {
+//     const jobOffer = await getByCountry(req.params.CountryJobOffer);
+//     res.json(jobOffer);
+//   } catch (error) {
+//     res.json({ error: error.message });
+//   }
+// });
 
-
-
-
-
+// Recupera job offers by SEARCH
+router.get('/joboffer/:name', async (req, res) => {
+  console.log(req.params.name);
+  try {
+    const jobOffer = await searchData(req.params.name);
+    res.json(jobOffer);
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
 
 // Crear un nuevo job offer
 // Los datos para crear job offer, me llegan a través del BODY

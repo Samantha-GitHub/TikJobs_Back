@@ -28,8 +28,38 @@ const getById = (pId) => {
   });
 };
 
+// GET Job Offer BY COUNTRY
+const getByCountry = (pName) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'SELECT * FROM ofertas_trabajos WHERE ofertas_trabajos.country = ?',
+      [pName],
+      (err, rows) => {
+        if (err) {
+          return reject(err);
+        } else {
+          resolve(rows[0]);
+        }
+      }
+    );
+  });
+};
 
+// GET SEARCH LIKE
+let searchData = (name) => {
+  return new Promise((resolve, reject) => {
+    const searchJob = `SELECT * FROM ofertas_trabajos WHERE country LIKE '%${name}%' OR city LIKE '%${name}%' OR function_department LIKE '%${name}%' `;
+    //searchValues = [search,search,search,search]
 
+    db.query(searchJob, function (errQuery, resQuery) {
+      if (errQuery) {
+        return reject(errQuery);
+      } else {
+        resolve(resQuery);
+      }
+    });
+  });
+};
 
 // NEW JOB OFFER
 const create = ({
@@ -109,5 +139,6 @@ module.exports = {
   updateById,
   deleteById,
   getById,
-
+  getByCountry,
+  searchData,
 };
