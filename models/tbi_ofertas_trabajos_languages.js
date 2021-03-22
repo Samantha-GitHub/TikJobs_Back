@@ -16,7 +16,7 @@ const create = ({ fk_languages, fk_ofertas_trabajos }) => {
 const updateById = ({ fk_languages, fk_ofertas_trabajos, id }) => {
     return new Promise((resolve, reject) => {
         db.query(
-            'UPDATE tbi_languages_ofertas_trabajos set fk_language = ? AND fk_ofertas_trabajos = ?  WHERE id = ?',
+            'UPDATE tbi_languages_ofertas_trabajos set fk_languages = ? , fk_ofertas_trabajos = ?  WHERE id = 52;',
             [fk_languages, fk_ofertas_trabajos, id],
             (err, result) => {
                 if (err) return reject(err);

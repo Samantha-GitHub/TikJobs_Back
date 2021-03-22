@@ -59,11 +59,11 @@ const create = ({ skill }) => {
   });
 };
 
-// UPDATE skill
+// UPDATE language
 const updateById = ({ id, skill }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE languages set languages = ?,  WHERE id = ?',
+      'UPDATE languages set languages = ?  WHERE id = ?',
       [languages, id],
       (err, result) => {
         if (err) return reject(err);

@@ -63,7 +63,7 @@ const create = ({ skill }) => {
 const updateById = ({ id, skill }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE skills set skill = ?,  WHERE id = ?',
+      'UPDATE skills set skill = ?  WHERE id = ?',
       [skill, id],
       (err, result) => {
         if (err) return reject(err);

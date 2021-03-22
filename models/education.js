@@ -41,7 +41,7 @@ const updateById = ({
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE education set degree = ?, school = ?, city = ?, country = ?, start_date = ?, end_date = ?,  WHERE id = ?',
+      'UPDATE education set degree = ?, school = ?, city = ?, country = ?, start_date = ?, end_date = ?  WHERE id = ?',
       [degree, school, city, country, start_date, end_date, id],
       (err, result) => {
         if (err) return reject(err);

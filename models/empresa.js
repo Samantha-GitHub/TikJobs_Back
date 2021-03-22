@@ -147,7 +147,7 @@ const updateById = ({
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE empresa set name_company = ?, phone = ?, vat = ?, street = ?, city = ?, zip_code = ?, country = ?, website = ?, image = ?, email = ?, employees_number = ?, year_founded = ?,  WHERE id = ?',
+      'UPDATE empresa set name_company = ?, phone = ?, vat = ?, street = ?, city = ?, zip_code = ?, country = ?, website = ?, image = ?, email = ?, employees_number = ?, year_founded = ?  WHERE id = ?',
       [
         name_company,
         phone,
