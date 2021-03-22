@@ -142,7 +142,11 @@ const updateById = ({
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
+<<<<<<< develop
       'UPDATE empresa set name_company = ?, phone = ?, vat = ?, street = ?, city = ?, zip_code = ?, country = ?, website = ?, image = ?, email = ?, employees_number = ?, year_founded = ? ,  password=?, username=? WHERE id = ?',
+=======
+      'UPDATE empresa set name_company = ?, phone = ?, vat = ?, street = ?, city = ?, zip_code = ?, country = ?, website = ?, image = ?, email = ?, employees_number = ?, year_founded = ?  WHERE id = ?',
+>>>>>>> rest created for post, fixed wrong queries
       [
         name_company,
         phone,

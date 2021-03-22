@@ -25,6 +25,17 @@ POST http://localhost:3000/api/tbi_ofertas_trabajos_languages
    "fk_ofertas_trabajos" : 1
 
 }
+###
+
+POST http://localhost:3000/api/tbi_ofertas_trabajos_languages
+Content-Type: 'application/json' 
+
+{
+   
+   "fk_languages" : 1,
+   "fk_ofertas_trabajos" : 1
+
+}
 
 
 
