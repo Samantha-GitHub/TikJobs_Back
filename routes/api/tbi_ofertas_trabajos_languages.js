@@ -7,10 +7,13 @@ const {
 const router = require('express').Router();
 
 // Crear fk_ofertas_trabajos con fk_languages
-router.post('/', async (req, res) => {
+router.post('/', (req, res) => {
     try {
-        const result = await create(req.body);
-        res.json(result);
+        req.body.languages.map(async language => {
+            const result = await create(language.id);
+            res.json(result);
+        })
+
     } catch (error) {
         res.status(422).json({ error: error.message });
     }
