@@ -9,7 +9,9 @@ const coursesApiRouter = require('./api/courses');
 const educationsApiRouter = require('./api/educations');
 const profesionalExperienceApiRouter = require('./api/profesional_experience');
 const languagesApiRouter = require('./api/languages');
-const userssApiRouter = require('./api/users');
+const usersApiRouter = require('./api/users');
+const tbi_ofertas_trabajos_languages_ApiRouter = require('./api/tbi_ofertas_trabajos_languages');
+const tbi_ofertas_trabajos_skills_ApiRouter = require('./api/tbi_ofertas_trabajos_skills');
 
 router.use('/freelancers', freelancersApiRouter);
 router.use('/companies', empresasApiRouter);
@@ -20,5 +22,8 @@ router.use('/educations', educationsApiRouter);
 router.use('/profesional_experience', profesionalExperienceApiRouter);
 router.use('/languages', languagesApiRouter);
 router.use('/users', languagesApiRouter);
+router.use('/tbi_ofertas_trabajos_skills', tbi_ofertas_trabajos_skills_ApiRouter);
+router.use('/tbi_ofertas_trabajos_languages', tbi_ofertas_trabajos_languages_ApiRouter);
+
 
 module.exports = router;
