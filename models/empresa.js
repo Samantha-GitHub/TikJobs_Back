@@ -15,7 +15,7 @@ const getAll = () => {
 const getById = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT * FROM empresa WHERE usuario.id = ?',
+      'SELECT * FROM empresa WHERE empresa.id = ?',
       [pId],
       (err, rows) => {
         if (err) {

@@ -25,6 +25,7 @@ router.get('/', async (req, res) => {
 
 // Recupera UNA unica empresa by ID
 router.get('/:idCompany', async (req, res) => {
+  console.log(req.params);
 
   try {
     const company = await getById(req.params.idCompany);
