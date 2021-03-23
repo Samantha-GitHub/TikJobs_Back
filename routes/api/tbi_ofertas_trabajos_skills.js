@@ -8,8 +8,9 @@ const router = require('express').Router();
 
 // Crear fk_ofertas_trabajos con fk_skills
 router.post('/', async (req, res) => {
+    console.log(req.body);
     try {
-        const result = await create(req.body);
+        const result = await create(req.body.skill, req.body.job_offer);
         res.json(result);
     } catch (error) {
         res.status(422).json({ error: error.message });
