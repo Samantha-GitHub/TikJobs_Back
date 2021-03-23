@@ -44,10 +44,12 @@ const create = ({
   video,
   job_title,
   profile,
+  password,
+  username,
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'INSERT INTO tikjob.usuario (firstname,lastname,email,phone,gender,country,city,zipcode,streetName,website,image,video,job_title,profile) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      'INSERT INTO tikjob.usuario (firstname,lastname,email,phone,gender,country,city,zipcode,streetName,website,image,video,job_title,profile, password, username) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
       [
         firstname,
         lastname,
@@ -63,21 +65,9 @@ const create = ({
         video,
         job_title,
         profile,
+        password,
+        username,
       ],
-      (err, result) => {
-        if (err) return reject(err);
-        resolve(result);
-      }
-    );
-  });
-};
-
-// CREATE FREELANCER USER
-const createUser = ({ username, email, password }) => {
-  return new Promise((resolve, reject) => {
-    db.query(
-      'insert into usuarios (username, email, password, fecha_registro) values (?, ?, ?, ?, ?)',
-      [username, email, password, new Date()],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);
@@ -116,10 +106,12 @@ const updateById = ({
   video,
   job_title,
   profile,
+  password,
+  username,
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE usuario set firstname = ?, lastname = ?, email = ?, phone = ?, gender = ?, country = ?, city = ?, zipcode = ?, streetName = ?, website = ?, image = ?, video = ?, job_title = ?, image = ?, profile = ?  WHERE id = ?',
+      'UPDATE usuario set firstname = ?, lastname = ?, email = ?, phone = ?, gender = ?, country = ?, city = ?, zipcode = ?, streetName = ?, website = ?, image = ?, video = ?, job_title = ?, image = ?, profile = ?, password = ? , username = ?,  WHERE id = ?',
       [
         firstname,
         lastname,
@@ -135,6 +127,8 @@ const updateById = ({
         video,
         job_title,
         profile,
+        password,
+        username,
         id,
       ],
       (err, result) => {
@@ -161,4 +155,5 @@ module.exports = {
   updateById,
   deleteById,
   getById,
+  getByEmail,
 };

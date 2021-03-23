@@ -3,7 +3,7 @@ const {
   create,
   deleteById,
   updateById,
-  getById
+  getById,
 } = require('../../models/freelancer');
 
 const router = require('express').Router();
@@ -23,7 +23,6 @@ router.get('/', async (req, res) => {
 
 // Recupera UN unico freelancers by ID
 router.get('/:idFreelancer', async (req, res) => {
-
   try {
     const freelancer = await getById(req.params.idFreelancer);
     res.json(freelancer);
@@ -35,6 +34,7 @@ router.get('/:idFreelancer', async (req, res) => {
 // Crear un nuevo freelancer
 // Los datos para crear el freelancer, me llegan a través del BODY
 router.post('/', async (req, res) => {
+  console.log(req.body);
   try {
     const result = await create(req.body);
     res.json(result);
