@@ -6,7 +6,7 @@ GET http://localhost:3000/api/job_offers/joboffer/spain
 
 ###
 
-GET http://localhost:3000/api/freelancers
+GET http://localhost:3000/api/freelancers/1
 
 ###
 
