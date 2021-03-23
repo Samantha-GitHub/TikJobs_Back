@@ -14,18 +14,6 @@ const create = ({ fk_skills, fk_ofertas_trabajos }) => {
 
 // UPDATE fk_skill con fk_ofertas_trabajos
 const updateById = ({ fk_skills, fk_ofertas_trabajos, id }) => {
-<<<<<<< develop
-    return new Promise((resolve, reject) => {
-        db.query(
-            'UPDATE tbi_skills_ofertas_trabajos set fk_skills = ?, fk_ofertas_trabajos= ?  WHERE id = ?',
-            [fk_skills, fk_ofertas_trabajos, id],
-            (err, result) => {
-                if (err) return reject(err);
-                resolve(result);
-            }
-        );
-    });
-=======
   return new Promise((resolve, reject) => {
     db.query(
       'UPDATE tbi_skills_ofertas_trabajos set fk_skills = ? AND fk_ofertas_trabajos= ?  WHERE id = ?',
@@ -36,7 +24,6 @@ const updateById = ({ fk_skills, fk_ofertas_trabajos, id }) => {
       }
     );
   });
->>>>>>> rest created for post, fixed wrong queries
 };
 
 // DELETE fk_skill con fk_ofertas_trabajos

@@ -15,7 +15,7 @@ const getAll = () => {
 const getById = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT * FROM empresa WHERE usuario.id = ?',
+      'SELECT * FROM empresa WHERE empresa.id = ?',
       [pId],
       (err, rows) => {
         if (err) {
@@ -77,7 +77,7 @@ const create = ({
   employees_number,
   year_founded,
   password,
-  username
+  username,
 }) => {
   console.log(image);
   return new Promise((resolve, reject) => {
@@ -97,7 +97,7 @@ const create = ({
         employees_number,
         year_founded,
         password,
-        username
+        username,
       ],
       (err, result) => {
         if (err) return reject(err);
@@ -106,8 +106,6 @@ const create = ({
     );
   });
 };
-
-
 
 // search by email
 const getByEmail = (email) => {
@@ -138,15 +136,11 @@ const updateById = ({
   employees_number,
   year_founded,
   password,
-  username
+  username,
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-<<<<<<< develop
       'UPDATE empresa set name_company = ?, phone = ?, vat = ?, street = ?, city = ?, zip_code = ?, country = ?, website = ?, image = ?, email = ?, employees_number = ?, year_founded = ? ,  password=?, username=? WHERE id = ?',
-=======
-      'UPDATE empresa set name_company = ?, phone = ?, vat = ?, street = ?, city = ?, zip_code = ?, country = ?, website = ?, image = ?, email = ?, employees_number = ?, year_founded = ?  WHERE id = ?',
->>>>>>> rest created for post, fixed wrong queries
       [
         name_company,
         phone,
@@ -163,7 +157,6 @@ const updateById = ({
         password,
         username,
         id,
-
       ],
       (err, result) => {
         if (err) return reject(err);
