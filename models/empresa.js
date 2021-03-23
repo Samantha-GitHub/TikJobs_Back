@@ -76,10 +76,13 @@ const create = ({
   email,
   employees_number,
   year_founded,
+  password,
+  username
 }) => {
+  console.log(image);
   return new Promise((resolve, reject) => {
     db.query(
-      'INSERT INTO empresa (name_company,phone,vat,street,city,zip_code,country,website,image,email,employees_number,year_founded) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      'INSERT INTO empresa (name_company,phone,vat,street,city,zip_code,country,website,image,email,employees_number,year_founded,  password, username) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
       [
         name_company,
         phone,
@@ -93,6 +96,8 @@ const create = ({
         email,
         employees_number,
         year_founded,
+        password,
+        username
       ],
       (err, result) => {
         if (err) return reject(err);
@@ -102,19 +107,7 @@ const create = ({
   });
 };
 
-// CREATE Company USER
-const createUser = ({ username, email, password }) => {
-  return new Promise((resolve, reject) => {
-    db.query(
-      'insert into usuarios (username, email, password, fecha_registro) values (?, ?, ?, ?, ?)',
-      [username, email, password, new Date()],
-      (err, result) => {
-        if (err) return reject(err);
-        resolve(result);
-      }
-    );
-  });
-};
+
 
 // search by email
 const getByEmail = (email) => {
@@ -144,10 +137,12 @@ const updateById = ({
   email,
   employees_number,
   year_founded,
+  password,
+  username
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE empresa set name_company = ?, phone = ?, vat = ?, street = ?, city = ?, zip_code = ?, country = ?, website = ?, image = ?, email = ?, employees_number = ?, year_founded = ?  WHERE id = ?',
+      'UPDATE empresa set name_company = ?, phone = ?, vat = ?, street = ?, city = ?, zip_code = ?, country = ?, website = ?, image = ?, email = ?, employees_number = ?, year_founded = ? ,  password=?, username=? WHERE id = ?',
       [
         name_company,
         phone,
@@ -161,7 +156,10 @@ const updateById = ({
         email,
         employees_number,
         year_founded,
+        password,
+        username,
         id,
+
       ],
       (err, result) => {
         if (err) return reject(err);

@@ -69,6 +69,7 @@ const create = ({
   country,
   starting_date,
   hour_week,
+
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
@@ -80,6 +81,8 @@ const create = ({
         country,
         starting_date,
         hour_week,
+        password,
+        username
       ],
       (err, result) => {
         if (err) return reject(err);
@@ -98,10 +101,11 @@ const updateById = ({
   country,
   starting_date,
   hour_week,
+
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE ofertas_trabajos set function_department = ?, responsabilities = ?, city = ?, country = ?, starting_date = ?, hour_week = ?  WHERE id = ?',
+      'UPDATE ofertas_trabajos set function_department = ?, responsabilities = ?, city = ?, country = ?, starting_date = ?, hour_week = ? WHERE id = ?',
       [
         function_department,
         responsabilities,
@@ -109,7 +113,8 @@ const updateById = ({
         country,
         starting_date,
         hour_week,
-        id,
+        id
+
       ],
       (err, result) => {
         if (err) return reject(err);

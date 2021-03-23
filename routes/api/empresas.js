@@ -60,6 +60,7 @@ router.get('/:pId', async (req, res) => {
 // Crear un nuevo company
 // Los datos para crear el company, me llegan a través del BODY
 router.post('/', async (req, res) => {
+
   try {
     const result = await create(req.body);
     res.json(result);
