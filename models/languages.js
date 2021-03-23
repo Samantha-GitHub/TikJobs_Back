@@ -45,12 +45,12 @@ const getLanguagesByIdJobsOffers = (pId) => {
   });
 };
 
-// NEW skill
-const create = ({ skill }) => {
+// NEW language
+const create = ({ language }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'INSERT INTO languages (skill) VALUES (?)',
-      [languages],
+      'INSERT INTO languages (language) VALUES (?)',
+      [language],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);
@@ -60,11 +60,11 @@ const create = ({ skill }) => {
 };
 
 // UPDATE language
-const updateById = ({ id, skill }) => {
+const updateById = ({ id, language }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE languages set languages = ?  WHERE id = ?',
-      [languages, id],
+      'UPDATE languages set language = ?  WHERE id = ?',
+      [language, id],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);

@@ -1,5 +1,5 @@
 // NEW fk_skill con fk_ofertas_trabajos
-const create = ({ fk_skills, fk_ofertas_trabajos }) => {
+const create = (fk_skills, fk_ofertas_trabajos) => {
   return new Promise((resolve, reject) => {
     db.query(
       'INSERT INTO tbi_skills_ofertas_trabajos (fk_skills, fk_ofertas_trabajos) VALUES (?,?)',

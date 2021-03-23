@@ -10,6 +10,7 @@ const educationsApiRouter = require('./api/educations');
 const profesionalExperienceApiRouter = require('./api/profesional_experience');
 const languagesApiRouter = require('./api/languages');
 const usersApiRouter = require('./api/users');
+
 const tbi_ofertas_trabajos_languages_ApiRouter = require('./api/tbi_ofertas_trabajos_languages');
 const tbi_ofertas_trabajos_skills_ApiRouter = require('./api/tbi_ofertas_trabajos_skills');
 
