@@ -1,9 +1,9 @@
-// NEW fk_skill con fk_usuario
-const create = (fk_usuario, fk_skill) => {
+// NEW fk_languages con fk_usuario
+const create = (fk_usuario, fk_languages) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'INSERT INTO tbi_skills_usuario (fk_usuario, fk_skill) VALUES (?,?)',
-      [fk_usuario, fk_skill],
+      'INSERT INTO tbi_languages_usuario (fk_usuario, fk_languages) VALUES (?,?)',
+      [fk_usuario, fk_languages],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);
@@ -12,12 +12,12 @@ const create = (fk_usuario, fk_skill) => {
   });
 };
 
-// UPDATE fk_skill con fk_freelance
-const updateById = (fk_usuario, fk_skill, id) => {
+// UPDATE fk_languages con fk_usuario
+const updateById = (fk_usuario, fk_languages, id) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE tbi_skills_usuario set fk_usuario= ? AND fk_skill = ? WHERE id = ?',
-      [fk_usuario, fk_skill, id],
+      'UPDATE tbi_languages_usuario set fk_usuario= ? AND fk_languages = ? WHERE id = ?',
+      [fk_usuario, fk_languages, id],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);
@@ -26,11 +26,11 @@ const updateById = (fk_usuario, fk_skill, id) => {
   });
 };
 
-// DELETE fk_skill con fk_freelance
+// DELETE fk_languages con fk_usuario
 const deleteById = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'DELETE from tbi_skills_usuario WHERE id = ?',
+      'DELETE from tbi_languages_usuario WHERE id = ?',
       [pId],
       (err, result) => {
         if (err) return reject(err);

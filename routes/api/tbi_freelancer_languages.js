@@ -2,31 +2,31 @@ const {
   create,
   updateById,
   deleteById,
-} = require('../../models/tbi_freelancer_skills');
+} = require('../../models/tbi_freelancer_languages');
 
 const router = require('express').Router();
 
-// Crear fk_usuario con fk_skill
+// Crear fk_usuario con fk_language
 router.post('/', async (req, res) => {
   try {
-    const result = await create(req.body.skill, req.body.freelance);
+    const result = await create(req.body.language, req.body.freelance);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });
   }
 });
 
-// Actualizar fk_usuario y fk_skill
+// Actualizar fk_usuario y fk_language
 router.put('/', async (req, res) => {
   try {
-    const result = await updateById(req.body.skill, req.body.freelance);
+    const result = await updateById(req.body.language, req.body.freelance);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });
   }
 });
 
-// Borrar fk_ofertas_trabajos y fk_skills
+// Borrar fk_ofertas_trabajos y fk_language
 router.delete('/:id', async (req, res) => {
   try {
     const result = await deleteById(req.params.id);
