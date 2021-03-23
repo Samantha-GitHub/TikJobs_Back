@@ -45,12 +45,12 @@ router.get('/:idCompany', async (req, res) => {
 }); */
 
 // Recupera todos los JOB OFFER de un company y devuelve JSON
-router.get('/:pId', async (req, res) => {
+router.get('/:idCompany', async (req, res) => {
   // Id de company inyectado por el Middleware checkToken!
   // console.log(req.courseId);
 
   try {
-    const jobOffer = await getJobOfferByIdCompany(req.params.pId);
+    const jobOffer = await getJobOfferByIdCompany(req.params.idCompany);
     res.json(jobOffer);
   } catch (error) {
     res.json({ error: error.message });
