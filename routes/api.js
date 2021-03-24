@@ -23,7 +23,6 @@ router.use('/courses', coursesApiRouter);
 router.use('/educations', educationsApiRouter);
 router.use('/profesional_experience', profesionalExperienceApiRouter);
 router.use('/languages', languagesApiRouter);
-router.use('/users', languagesApiRouter);
 router.use(
   '/tbi_ofertas_trabajos_skills',
   tbi_ofertas_trabajos_skills_ApiRouter
