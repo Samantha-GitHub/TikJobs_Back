@@ -23,7 +23,7 @@ const checkToken = (req, res, next) => {
 
   // Incluir en la petición el ID del USUARIO que está realizando dicha petición
   req.userId = data.userId;
-  req.empresaId = data.empresaId;
+  req.empresaId = data.companyId;
 
   next();
 };
