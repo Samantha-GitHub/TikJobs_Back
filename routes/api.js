@@ -1,8 +1,9 @@
 const router = require('express').Router();
-// const { checkToken } = require('./middlewares');
+const { checkToken } = require('./middlewares');
 
 const freelancersApiRouter = require('./api/freelancers');
 const empresasApiRouter = require('./api/empresas');
+
 const skillsApiRouter = require('./api/skills');
 const ofertasApiRouter = require('./api/ofertas');
 const coursesApiRouter = require('./api/courses');

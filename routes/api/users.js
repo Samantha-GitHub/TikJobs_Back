@@ -37,10 +37,10 @@ router.post('/login', async (req, res) => {
 function createToken(pUser) {
   const data = {
     userId: pUser.id,
-    caduca: dayjs().add(15, 'minutes').unix(),
+    caduca: dayjs().add(10, 'hours').unix(),
   };
 
-  return jwt.sign(data, 'abanibi aboebe');
+  return jwt.sign(data, 'tikjobs');
 }
 
 module.exports = router;

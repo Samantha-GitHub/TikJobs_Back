@@ -13,7 +13,7 @@ const create = (fk_languages, fk_ofertas_trabajos) => {
 };
 
 // UPDATE fk_skill y fk_languages
-const updateById = ({ fk_languages, fk_ofertas_trabajos, id }) => {
+const updateById = (fk_languages, fk_ofertas_trabajos, id) => {
     return new Promise((resolve, reject) => {
         db.query(
             'UPDATE tbi_languages_ofertas_trabajos set fk_languages = ? , fk_ofertas_trabajos = ?  WHERE id = ?;',

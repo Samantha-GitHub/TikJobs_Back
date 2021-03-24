@@ -61,6 +61,18 @@ const getJobOfferByIdCompany = (pId) => {
     );
   });
 };
+// get by email
+const getByEmail = (email) => {
+  return new Promise((resolve, reject) => {
+    //db.query('QUERY', [], (err, result) => { });
+
+    db.query('select * from empresa where email = ?', [email], (err, rows) => {
+      if (err) return reject(err);
+      if (rows.length === 0) return resolve(null);
+      resolve(rows[0]);
+    });
+  });
+};
 
 // NEW COMPANY
 const create = ({
@@ -107,18 +119,7 @@ const create = ({
   });
 };
 
-// search by email
-const getByEmail = (email) => {
-  return new Promise((resolve, reject) => {
-    //db.query('QUERY', [], (err, result) => { });
 
-    db.query('select * from usuarios where email = ?', [email], (err, rows) => {
-      if (err) return reject(err);
-      if (rows.length === 0) return resolve(null);
-      resolve(rows[0]);
-    });
-  });
-};
 
 // UPDATE COMPANY
 const updateById = ({
@@ -183,5 +184,6 @@ module.exports = {
   deleteById,
   getById,
   getJobOfferByIdCompany,
+  getByEmail
   /* getCompanyDetailByJobOffer */
 };
