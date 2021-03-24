@@ -16,7 +16,6 @@ const dayjs = require('dayjs');
 const jwt = require('jsonwebtoken');
 const { checkToken } = require('../middlewares');
 
-
 /* TOKEN Y MIDDLEWARE */
 
 // Body -> email, password
@@ -40,9 +39,7 @@ router.post('/login', async (req, res) => {
 });
 
 function createToken(pCompany) {
-
   const data = {
-
     companyId: pCompany.id,
 
     /* 
@@ -50,11 +47,11 @@ function createToken(pCompany) {
         unix es la unidad de mesura del tiempo
     */
 
-    caduca: dayjs().add(10, 'hours').unix()
-  }
+    caduca: dayjs().add(10, 'hours').unix(),
+  };
 
-  return jwt.sign(data, 'tikjobs')
-};
+  return jwt.sign(data, 'tikjobs');
+}
 
 /* END TOKEN Y MIDDLEWARE */
 
@@ -122,7 +119,6 @@ router.get('/:idCompany', async (req, res) => {
 // Crear un nuevo company
 // Los datos para crear el company, me llegan a través del BODY
 router.post('/', async (req, res) => {
-
   try {
     req.body.password = bcrypt.hashSync(req.body.password, 10);
     const result = await create(req.body);
