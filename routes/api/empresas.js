@@ -71,6 +71,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Recupera UNA unica empresa by ID para editar por TOKEN
+router.get('/edit', checkToken, async (req, res) => {
+
+
+  try {
+
+    const company = await getById(req.empresaId);
+    res.json(company);
+    console.log('req.empresaId', req.empresaId);
+    console.log(company);
+  } catch (error) {
+    console.log(error);
+    res.json({ error: error.message });
+  }
+});
+
 // Recupera UNA unica empresa by ID
 router.get('/:idCompany', async (req, res) => {
   console.log(req.params);
@@ -83,18 +99,7 @@ router.get('/:idCompany', async (req, res) => {
   }
 });
 
-// Recupera UNA unica empresa by ID para editar por TOKEN
-router.get('/edit/:idCompany', checkToken, async (req, res) => {
-  console.log(req.params);
 
-  try {
-    const company = await getById(req.empresaId);
-    res.json(company);
-    console.log(company);
-  } catch (error) {
-    res.json({ error: error.message });
-  }
-});
 
 // Recupera El detalle de la empresa por oferta trabajo
 /* router.getCompanyDetailByJobOffer('/:idJobOffer', async (req, res) => {
