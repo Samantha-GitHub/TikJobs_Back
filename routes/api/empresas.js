@@ -16,7 +16,6 @@ const dayjs = require('dayjs');
 const jwt = require('jsonwebtoken');
 const { checkToken } = require('../middlewares');
 
-
 /* TOKEN Y MIDDLEWARE */
 
 // Body -> email, password
@@ -40,9 +39,7 @@ router.post('/login', async (req, res) => {
 });
 
 function createToken(pCompany) {
-
   const data = {
-
     companyId: pCompany.id,
 
     /* 
@@ -50,11 +47,11 @@ function createToken(pCompany) {
         unix es la unidad de mesura del tiempo
     */
 
-    caduca: dayjs().add(10, 'hours').unix()
-  }
+    caduca: dayjs().add(10, 'hours').unix(),
+  };
 
-  return jwt.sign(data, 'tikjobs')
-};
+  return jwt.sign(data, 'tikjobs');
+}
 
 /* END TOKEN Y MIDDLEWARE */
 
@@ -73,10 +70,7 @@ router.get('/', async (req, res) => {
 
 // Recupera UNA unica empresa by ID para pintando por TOKEN
 router.get('/profile', checkToken, async (req, res) => {
-
-
   try {
-
     const company = await getById(req.empresaId);
     res.json(company);
     /* console.log('req.empresaId', req.empresaId);
@@ -98,8 +92,6 @@ router.get('/:idCompany', async (req, res) => {
     res.json({ error: error.message });
   }
 });
-
-
 
 // Recupera El detalle de la empresa por oferta trabajo
 /* router.getCompanyDetailByJobOffer('/:idJobOffer', async (req, res) => {
@@ -127,7 +119,6 @@ router.get('/:idCompany', async (req, res) => {
 // Crear un nuevo company
 // Los datos para crear el company, me llegan a través del BODY
 router.post('/', async (req, res) => {
-
   try {
     req.body.password = bcrypt.hashSync(req.body.password, 10);
     const result = await create(req.body);
@@ -151,7 +142,8 @@ router.delete('/:idCompany', async (req, res) => {
 router.put('/update', checkToken, async (req, res) => {
   console.log(req.body);
   try {
-    req.body.password = bcrypt.hashSync(req.body.password, 10);
+    // WE CANT UPDATE AN ALREADY HASHED PASSWORD. GOTTTA CREATE A NEW ONE
+    // req.body.password = bcrypt.hashSync(req.body.password, 10);
     const result = await updateById(req.empresaId);
     res.json(result);
   } catch (error) {
@@ -159,10 +151,6 @@ router.put('/update', checkToken, async (req, res) => {
     console.log(error);
   }
 });
-
-
-
-
 
 //GET http://localhost:3000/users/userId
 

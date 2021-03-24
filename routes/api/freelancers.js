@@ -4,13 +4,14 @@ const {
   deleteById,
   updateById,
   getById,
-  getByEmail
+  getByEmail,
 } = require('../../models/freelancer');
 
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const dayjs = require('dayjs');
 const jwt = require('jsonwebtoken');
+const { checkToken } = require('../middlewares');
 
 /* TOKEN Y MIDDLEWARE */
 
@@ -44,9 +45,6 @@ function createToken(pFreelance) {
 }
 /* END TOKEN Y MIDDLEWARE */
 
-
-
-
 // Recupera todos los freelancers y devuelve JSON
 router.get('/', async (req, res) => {
   // Id de freelancer inyectado por el Middleware checkToken!
@@ -54,6 +52,16 @@ router.get('/', async (req, res) => {
 
   try {
     const freelancer = await getAll();
+    res.json(freelancer);
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
+
+// Recupera UNA unica empresa by ID para pintando por TOKEN
+router.get('/profile', checkToken, async (req, res) => {
+  try {
+    const freelancer = await getById(req.userId);
     res.json(freelancer);
   } catch (error) {
     res.json({ error: error.message });
@@ -73,8 +81,9 @@ router.get('/:idFreelancer', async (req, res) => {
 // Crear un nuevo freelancer
 // Los datos para crear el freelancer, me llegan a través del BODY
 router.post('/', async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
+    req.body.password = bcrypt.hashSync(req.body.password, 10);
     const result = await create(req.body);
     res.json(result);
   } catch (error) {
@@ -93,7 +102,7 @@ router.delete('/:idFreelancer', async (req, res) => {
 });
 
 // Actualizo un freelancer
-router.put('/', async (req, res) => {
+router.put('/update', checkToken, async (req, res) => {
   try {
     const result = await updateById(req.body);
     res.json(result);
