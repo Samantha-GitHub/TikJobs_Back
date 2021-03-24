@@ -76,12 +76,12 @@ const create = ({
   });
 };
 
-// search by email
+// get by email
 const getByEmail = (email) => {
   return new Promise((resolve, reject) => {
     //db.query('QUERY', [], (err, result) => { });
 
-    db.query('select * from usuarios where email = ?', [email], (err, rows) => {
+    db.query('select * from usuario WHERE email = ?', [email], (err, rows) => {
       if (err) return reject(err);
       if (rows.length === 0) return resolve(null);
       resolve(rows[0]);

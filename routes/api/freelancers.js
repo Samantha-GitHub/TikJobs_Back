@@ -4,9 +4,48 @@ const {
   deleteById,
   updateById,
   getById,
+  getByEmail
 } = require('../../models/freelancer');
 
 const router = require('express').Router();
+const bcrypt = require('bcryptjs');
+const dayjs = require('dayjs');
+const jwt = require('jsonwebtoken');
+
+/* TOKEN Y MIDDLEWARE */
+
+// Body -> email, password
+router.post('/login', async (req, res) => {
+  // Compruebo si el email está en la BDc
+  const freelance = await getByEmail(req.body.email);
+  if (freelance) {
+    // Compruebo si las password coinciden
+    const iguales = bcrypt.compareSync(req.body.password, freelance.password);
+    if (iguales) {
+      res.json({
+        success: 'Login correcto!!',
+        token: createToken(freelance),
+      });
+    } else {
+      res.json({ error: 'Error en email y/o password' });
+    }
+  } else {
+    res.json({ error: 'Error en email y/o password' });
+  }
+});
+
+function createToken(pFreelance) {
+  const data = {
+    freelanceId: pFreelance.id,
+    caduca: dayjs().add(10, 'hours').unix(),
+  };
+
+  return jwt.sign(data, 'tikjobs');
+}
+/* END TOKEN Y MIDDLEWARE */
+
+
+
 
 // Recupera todos los freelancers y devuelve JSON
 router.get('/', async (req, res) => {
