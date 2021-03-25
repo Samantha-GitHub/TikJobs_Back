@@ -28,6 +28,23 @@ const getById = (pId) => {
   });
 };
 
+// GET Job Offer BY ID
+const getByIdOffer = (pId) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'SELECT * FROM ofertas_trabajos WHERE ofertas_trabajos.id = ?',
+      [pId],
+      (err, rows) => {
+        if (err) {
+          return reject(err);
+        } else {
+          resolve(rows[0]);
+        }
+      }
+    );
+  });
+};
+
 // GET Job Offer BY COUNTRY
 const getByCountry = (pName) => {
   return new Promise((resolve, reject) => {
@@ -142,4 +159,5 @@ module.exports = {
   getById,
   getByCountry,
   searchData,
+  getByIdOffer
 };

@@ -7,8 +7,22 @@ const {
   getJobOfferByIdCompany,
   getByEmail,
 
+
   /* getCompanyDetailByJobOffer */
 } = require('../../models/empresa');
+
+const {
+  getByIdOffer
+
+} = require('../../models/oferta');
+
+const {
+  getSkillsByIdJobsOffers
+} = require('../../models/skill')
+
+const {
+  getLanguagesByIdJobsOffers
+} = require('../../models/languages')
 
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
@@ -72,9 +86,17 @@ router.get('/', async (req, res) => {
 router.get('/profile', checkToken, async (req, res) => {
   try {
     const company = await getById(req.empresaId);
+    const jobOffer = await getJobOfferByIdCompany(req.empresaId);
+    company.jobOffer = jobOffer
+    /*  const skills = await getSkillsByIdJobsOffers(req.empresaId);
+     const languages = await getLanguagesByIdJobsOffers(req.empresaId);
+     jobOffer.skills = skills;
+     jobOffer.languages = languages; */
     res.json(company);
     /* console.log('req.empresaId', req.empresaId);
     console.log(company); */
+
+
   } catch (error) {
     /* console.log(error); */
     res.json({ error: error.message });

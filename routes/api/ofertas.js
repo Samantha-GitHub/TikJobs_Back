@@ -31,6 +31,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+
 // Recupera UN unico job offer by ID
 router.get('/:idJobOffer', async (req, res) => {
   try {
