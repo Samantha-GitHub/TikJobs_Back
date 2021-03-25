@@ -8,6 +8,8 @@ const {
 } = require('../../models/skill');
 
 const router = require('express').Router();
+const { checkToken } = require('../middlewares');
+
 
 // Recupera todos los skills y devuelve JSON
 router.get('/', async (req, res) => {
@@ -47,6 +49,8 @@ router.get('/:pId', async (req, res) => {
     res.json({ error: error.message });
   }
 });
+
+
 
 // Crear un nuevo skill
 // Los datos para crear skill, me llegan a través del BODY

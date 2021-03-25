@@ -8,6 +8,14 @@ const {
   searchData,
 } = require('../../models/oferta');
 
+const {
+  getSkillsByIdJobsOffers
+} = require('../../models/skill')
+
+const {
+  getLanguagesByIdJobsOffers
+} = require('../../models/languages')
+
 const router = require('express').Router();
 
 // Recupera todos los job offers y devuelve JSON
@@ -27,6 +35,10 @@ router.get('/', async (req, res) => {
 router.get('/:idJobOffer', async (req, res) => {
   try {
     const jobOffer = await getById(req.params.idJobOffer);
+    const skills = await getSkillsByIdJobsOffers(req.params.idJobOffer);
+    const languages = await getLanguagesByIdJobsOffers(req.params.idJobOffer);
+    jobOffer.skills = skills;
+    jobOffer.languages = languages;
     res.json(jobOffer);
   } catch (error) {
     res.json({ error: error.message });
