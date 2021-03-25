@@ -32,7 +32,7 @@ const getSkillsByIdFreelance = (pId) => {
 const getSkillsByIdJobsOffers = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'SELECT skills.skill FROM tbi_skills_ofertas_trabajos JOIN skills ON skills.id = tbi_skills_ofertas_trabajos.fk_skill JOIN ofertas_trabajos ON ofertas_trabajos.id = tbi_skills_ofertas_trabajos.fk_oferta_trabajo WHERE ofertas_trabajos.id = ?;',
+      'select s.* from tbi_skills_ofertas_trabajos sot, skills s where sot.fk_skills = s.id and sot.fk_ofertas_trabajos = ?;',
       [pId],
       (err, rows) => {
         if (err) {
