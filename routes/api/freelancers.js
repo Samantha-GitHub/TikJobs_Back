@@ -7,6 +7,18 @@ const {
   getByEmail,
 } = require('../../models/freelancer');
 
+const { getCoursesByIdFreelance } = require('../../models/course');
+
+const { getEducationsByIdFreelance } = require('../../models/education');
+
+const { getLanguagesByIdFreelance } = require('../../models/languages');
+
+const { getSkillsByIdFreelance } = require('../../models/skill');
+
+const {
+  getProfesionalExperienceByIdFreelance,
+} = require('../../models/profesional_experience');
+
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const dayjs = require('dayjs');
@@ -37,7 +49,7 @@ router.post('/login', async (req, res) => {
 
 function createToken(pFreelance) {
   const data = {
-    freelanceId: pFreelance.id,
+    userId: pFreelance.id,
     caduca: dayjs().add(10, 'hours').unix(),
   };
 
@@ -62,8 +74,25 @@ router.get('/', async (req, res) => {
 router.get('/profile', checkToken, async (req, res) => {
   try {
     const freelancer = await getById(req.userId);
+    // console.log('holaaaaaaaaaaa', freelancer);
+
+    const course = await getCoursesByIdFreelance(req.userId);
+
+    const education = await getEducationsByIdFreelance(req.userId);
+
+    const language = await getLanguagesByIdFreelance(req.userId);
+
+    const skill = await getSkillsByIdFreelance(req.userId);
+
+    const experience = await getProfesionalExperienceByIdFreelance(req.userId);
+    freelancer.courses = course;
+    freelancer.education = education;
+    freelancer.languages = language;
+    freelancer.profesional_experience = experience;
+    freelancer.skills = skill;
     res.json(freelancer);
   } catch (error) {
+    console.log(error);
     res.json({ error: error.message });
   }
 });
@@ -72,6 +101,23 @@ router.get('/profile', checkToken, async (req, res) => {
 router.get('/:idFreelancer', async (req, res) => {
   try {
     const freelancer = await getById(req.params.idFreelancer);
+    // console.log('adios', freelancer);
+    const course = await getCoursesByIdFreelance(req.params.idFreelancer);
+
+    const education = await getEducationsByIdFreelance(req.params.idFreelancer);
+
+    const language = await getLanguagesByIdFreelance(req.params.idFreelancer);
+
+    const skill = await getSkillsByIdFreelance(req.params.idFreelancer);
+
+    const experience = await getProfesionalExperienceByIdFreelance(
+      req.params.idFreelancer
+    );
+    freelancer.courses = course;
+    freelancer.education = education;
+    freelancer.languages = language;
+    freelancer.profesional_experience = experience;
+    freelancer.skills = skill;
     res.json(freelancer);
   } catch (error) {
     res.json({ error: error.message });
