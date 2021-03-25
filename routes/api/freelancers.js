@@ -4,9 +4,46 @@ const {
   deleteById,
   updateById,
   getById,
+  getByEmail,
 } = require('../../models/freelancer');
 
 const router = require('express').Router();
+const bcrypt = require('bcryptjs');
+const dayjs = require('dayjs');
+const jwt = require('jsonwebtoken');
+const { checkToken } = require('../middlewares');
+
+/* TOKEN Y MIDDLEWARE */
+
+// Body -> email, password
+router.post('/login', async (req, res) => {
+  // Compruebo si el email está en la BDc
+  const freelance = await getByEmail(req.body.email);
+  if (freelance) {
+    // Compruebo si las password coinciden
+    const iguales = bcrypt.compareSync(req.body.password, freelance.password);
+    if (iguales) {
+      res.json({
+        success: 'Login correcto!!',
+        token: createToken(freelance),
+      });
+    } else {
+      res.json({ error: 'Error en email y/o password' });
+    }
+  } else {
+    res.json({ error: 'Error en email y/o password' });
+  }
+});
+
+function createToken(pFreelance) {
+  const data = {
+    freelanceId: pFreelance.id,
+    caduca: dayjs().add(10, 'hours').unix(),
+  };
+
+  return jwt.sign(data, 'tikjobs');
+}
+/* END TOKEN Y MIDDLEWARE */
 
 // Recupera todos los freelancers y devuelve JSON
 router.get('/', async (req, res) => {
@@ -15,6 +52,16 @@ router.get('/', async (req, res) => {
 
   try {
     const freelancer = await getAll();
+    res.json(freelancer);
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
+
+// Recupera UNA unica empresa by ID para pintando por TOKEN
+router.get('/profile', checkToken, async (req, res) => {
+  try {
+    const freelancer = await getById(req.userId);
     res.json(freelancer);
   } catch (error) {
     res.json({ error: error.message });
@@ -44,8 +91,9 @@ router.get('/edit', async (req, res) => {
 // Crear un nuevo freelancer
 // Los datos para crear el freelancer, me llegan a través del BODY
 router.post('/', async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
+    req.body.password = bcrypt.hashSync(req.body.password, 10);
     const result = await create(req.body);
     res.json(result);
   } catch (error) {
@@ -64,7 +112,7 @@ router.delete('/:idFreelancer', async (req, res) => {
 });
 
 // Actualizo un freelancer
-router.put('/', async (req, res) => {
+router.put('/update', checkToken, async (req, res) => {
   try {
     const result = await updateById(req.body);
     res.json(result);

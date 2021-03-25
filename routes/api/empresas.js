@@ -68,18 +68,15 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Recupera UNA unica empresa by ID para editar por TOKEN
-router.get('/edit', checkToken, async (req, res) => {
-
-
+// Recupera UNA unica empresa by ID para pintando por TOKEN
+router.get('/profile', checkToken, async (req, res) => {
   try {
-
     const company = await getById(req.empresaId);
     res.json(company);
-    console.log('req.empresaId', req.empresaId);
-    console.log(company);
+    /* console.log('req.empresaId', req.empresaId);
+    console.log(company); */
   } catch (error) {
-    console.log(error);
+    /* console.log(error); */
     res.json({ error: error.message });
   }
 });
@@ -95,8 +92,6 @@ router.get('/:idCompany', async (req, res) => {
     res.json({ error: error.message });
   }
 });
-
-
 
 // Recupera El detalle de la empresa por oferta trabajo
 /* router.getCompanyDetailByJobOffer('/:idJobOffer', async (req, res) => {
@@ -144,12 +139,16 @@ router.delete('/:idCompany', async (req, res) => {
 });
 
 // Actualizo un company
-router.put('/', async (req, res) => {
+router.put('/update', checkToken, async (req, res) => {
+  console.log(req.body);
   try {
-    const result = await updateById(req.body);
+    // WE CANT UPDATE AN ALREADY HASHED PASSWORD. GOTTTA CREATE A NEW ONE
+    // req.body.password = bcrypt.hashSync(req.body.password, 10);
+    const result = await updateById(req.empresaId);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });
+    console.log(error);
   }
 });
 
