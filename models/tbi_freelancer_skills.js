@@ -2,7 +2,7 @@
 const create = (fk_usuario, fk_skill) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'INSERT INTO tbi_skills_usuario (fk_usuario, fk_skill) VALUES (?,?)',
+      'INSERT INTO tbi_skills_usuario (fk_skill, fk_usuario) VALUES (?,?)',
       [fk_usuario, fk_skill],
       (err, result) => {
         if (err) return reject(err);
