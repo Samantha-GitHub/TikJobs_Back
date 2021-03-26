@@ -16,11 +16,19 @@ const getEducationsByIdFreelance = (pId) => {
 };
 
 // NEW education
-const create = ({ degree, school, city, country, start_date, end_date }) => {
+const create = ({
+  degree,
+  school,
+  city,
+  country,
+  start_date,
+  end_date,
+  fk_usuario,
+}) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'INSERT INTO educations (degree,school,city,country,start_date,end_date) VALUES (?, ?, ?, ?, ?, ?)',
-      [degree, school, city, country, start_date, end_date],
+      'INSERT INTO education (degree,school,city,country,start_date,end_date, fk_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [degree, school, city, country, start_date, end_date, fk_usuario],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);

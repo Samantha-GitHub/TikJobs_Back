@@ -6,7 +6,7 @@ const {
 } = require('../../models/course');
 
 const router = require('express').Router();
-
+const { checkToken } = require('../middlewares');
 // Recupera todos los courses de un freelance y devuelve JSON
 router.get('/:pId', async (req, res) => {
   // Id de company inyectado por el Middleware checkToken!
@@ -22,8 +22,9 @@ router.get('/:pId', async (req, res) => {
 
 // Crear un nuevo course
 // Los datos para crear el course, me llegan a través del BODY
-router.post('/', async (req, res) => {
+router.post('/', checkToken, async (req, res) => {
   try {
+    req.body.fk_usuario = req.userId;
     const result = await create(req.body);
     res.json(result);
   } catch (error) {

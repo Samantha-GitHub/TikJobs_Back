@@ -6,6 +6,7 @@ const {
 } = require('../../models/profesional_experience');
 
 const router = require('express').Router();
+const { checkToken } = require('../middlewares');
 
 // Recupera todos los Profesional Experiences y devuelve JSON
 router.get('/:pId', async (req, res) => {
@@ -13,7 +14,9 @@ router.get('/:pId', async (req, res) => {
   // console.log(req.job_offerId);
 
   try {
-    const profesionalExperience = await getProfesionalExperienceByIdFreelance(req.params.pId);
+    const profesionalExperience = await getProfesionalExperienceByIdFreelance(
+      req.params.pId
+    );
     res.json(profesionalExperience);
   } catch (error) {
     res.json({ error: error.message });
@@ -22,8 +25,9 @@ router.get('/:pId', async (req, res) => {
 
 // Crear un nuevo Profesional Experience
 // Los datos para crear Profesional Experience, me llegan a través del BODY
-router.post('/', async (req, res) => {
+router.post('/', checkToken, async (req, res) => {
   try {
+    req.body.fk_usuario = req.userId;
     const result = await create(req.body);
     res.json(result);
   } catch (error) {

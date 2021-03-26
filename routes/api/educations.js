@@ -6,6 +6,7 @@ const {
 } = require('../../models/education');
 
 const router = require('express').Router();
+const { checkToken } = require('../middlewares');
 
 // Recupera todos los educations de un freelance y devuelve JSON
 router.get('/:pId', async (req, res) => {
@@ -22,8 +23,9 @@ router.get('/:pId', async (req, res) => {
 
 // Crear un nuevo Education
 // Los datos para crear el Education, me llegan a través del BODY
-router.post('/', async (req, res) => {
+router.post('/', checkToken, async (req, res) => {
   try {
+    req.body.fk_usuario = req.userId;
     const result = await create(req.body);
     res.json(result);
   } catch (error) {

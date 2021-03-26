@@ -24,10 +24,11 @@ const create = ({
   course_link,
   start_date,
   end_date,
+  fk_usuario,
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'INSERT INTO courses (course_title,institution,city,country,course_link,start_date,end_date) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      'INSERT INTO courses (course_title,institution,city,country,course_link,start_date,end_date, fk_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
       [
         course_title,
         institution,
@@ -36,6 +37,7 @@ const create = ({
         course_link,
         start_date,
         end_date,
+        fk_usuario,
       ],
       (err, result) => {
         if (err) return reject(err);

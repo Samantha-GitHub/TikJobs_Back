@@ -16,11 +16,31 @@ const getProfesionalExperienceByIdFreelance = (pId) => {
 };
 
 // NEW profesional_experience
-const create = ({ degree, school, city, country, start_date, end_date }) => {
+const create = ({
+  employer,
+  job_title,
+  city,
+  country,
+  start_date,
+  end_date,
+  company_link,
+  description,
+  fk_usuario,
+}) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'INSERT INTO educations (degree,school,city,country,start_date,end_date) VALUES (?, ?, ?, ?, ?, ?)',
-      [degree, school, city, country, start_date, end_date],
+      'INSERT INTO profesional_experience (employer, job_title, city,country, start_date, end_date, company_link, description,fk_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [
+        employer,
+        job_title,
+        city,
+        country,
+        start_date,
+        end_date,
+        company_link,
+        description,
+        fk_usuario,
+      ],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);
@@ -32,17 +52,31 @@ const create = ({ degree, school, city, country, start_date, end_date }) => {
 // UPDATE profesional_experience
 const updateById = ({
   id,
-  degree,
-  school,
+  employer,
+  job_title,
   city,
   country,
   start_date,
   end_date,
+  company_link,
+  description,
+  fk_usuario,
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE education set degree = ?, school = ?, city = ?, country = ?, start_date = ?, end_date = ?  WHERE id = ?',
-      [degree, school, city, country, start_date, end_date, id],
+      'UPDATE profesional_experience set employer = ?, job_title = ?, city = ?, country = ?, start_date = ?, end_date = ?, company_link = ?, description= ? WHERE id = ?',
+      [
+        employer,
+        job_title,
+        city,
+        country,
+        start_date,
+        end_date,
+        company_link,
+        description,
+        fk_usuario,
+        id,
+      ],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);
@@ -54,10 +88,14 @@ const updateById = ({
 // DELETE profesional_experience
 const deleteById = (pId) => {
   return new Promise((resolve, reject) => {
-    db.query('DELETE from education WHERE id = ?', [pId], (err, result) => {
-      if (err) return reject(err);
-      resolve(result);
-    });
+    db.query(
+      'DELETE from profesional_experience WHERE id = ?',
+      [pId],
+      (err, result) => {
+        if (err) return reject(err);
+        resolve(result);
+      }
+    );
   });
 };
 

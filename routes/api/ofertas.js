@@ -8,17 +8,12 @@ const {
   searchData,
 } = require('../../models/oferta');
 
-const {
-  getSkillsByIdJobsOffers
-} = require('../../models/skill')
+const { getSkillsByIdJobsOffers } = require('../../models/skill');
 
-const {
-  getLanguagesByIdJobsOffers
-} = require('../../models/languages')
+const { getLanguagesByIdJobsOffers } = require('../../models/languages');
 
 const router = require('express').Router();
 const { checkToken } = require('../middlewares');
-
 
 // Recupera todos los job offers y devuelve JSON
 router.get('/', async (req, res) => {
@@ -32,7 +27,6 @@ router.get('/', async (req, res) => {
     res.json({ error: error.message });
   }
 });
-
 
 // Recupera UN unico job offer by ID
 router.get('/:idJobOffer', async (req, res) => {
@@ -73,7 +67,7 @@ router.get('/joboffer/:name', async (req, res) => {
 // Los datos para crear job offer, me llegan a través del BODY
 router.post('/', checkToken, async (req, res) => {
   try {
-    req.body.fk_empresa = req.empresaId
+    req.body.fk_empresa = req.empresaId;
     const result = await create(req.body);
     res.json(result);
   } catch (error) {
@@ -85,7 +79,7 @@ router.post('/', checkToken, async (req, res) => {
 router.delete('/', checkToken, async (req, res) => {
   try {
     console.log(req.body);
-    req.body.fk_empresa = req.empresaId
+    req.body.fk_empresa = req.empresaId;
     const result = await deleteByIdToken(req.body);
     res.json(result);
   } catch (error) {
