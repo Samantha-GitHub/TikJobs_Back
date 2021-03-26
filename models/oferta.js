@@ -140,11 +140,11 @@ const updateById = ({
 };
 
 // DELETE JOB OFFER
-const deleteById = (pId) => {
+const deleteByIdToken = ({ id, fk_empresa }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'DELETE from ofertas_trabajos WHERE id = ?',
-      [pId],
+      'DELETE from ofertas_trabajos WHERE id = ? AND fk_empresa = ?',
+      [id, fk_empresa],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);
@@ -157,7 +157,7 @@ module.exports = {
   getAll,
   create,
   updateById,
-  deleteById,
+  deleteByIdToken,
   getById,
   getByCountry,
   searchData,

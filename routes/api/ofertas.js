@@ -1,7 +1,7 @@
 const {
   getAll,
   create,
-  deleteById,
+  deleteByIdToken,
   updateById,
   getById,
   getByCountry,
@@ -82,9 +82,11 @@ router.post('/', checkToken, async (req, res) => {
 });
 
 // Borro un job offer
-router.delete('/:idJob_offer', async (req, res) => {
+router.delete('/', checkToken, async (req, res) => {
   try {
-    const result = await deleteById(req.params.idJob_offer);
+    console.log(req.body);
+    req.body.fk_empresa = req.empresaId
+    const result = await deleteByIdToken(req.body);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });
