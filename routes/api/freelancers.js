@@ -36,14 +36,14 @@ router.post('/login', async (req, res) => {
     const iguales = bcrypt.compareSync(req.body.password, freelance.password);
     if (iguales) {
       res.json({
-        success: 'Login correcto!!',
+        success: 'Welcome back!!',
         token: createToken(freelance),
       });
     } else {
-      res.json({ error: 'Error en email y/o password' });
+      res.json({ error: 'Wrong email or password' });
     }
   } else {
-    res.json({ error: 'Error en email y/o password' });
+    res.json({ error: 'Wrong email or password' });
   }
 });
 
