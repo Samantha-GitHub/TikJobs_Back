@@ -17,6 +17,8 @@ const {
 } = require('../../models/languages')
 
 const router = require('express').Router();
+const { checkToken } = require('../middlewares');
+
 
 // Recupera todos los job offers y devuelve JSON
 router.get('/', async (req, res) => {
@@ -69,8 +71,9 @@ router.get('/joboffer/:name', async (req, res) => {
 
 // Crear un nuevo job offer
 // Los datos para crear job offer, me llegan a través del BODY
-router.post('/', async (req, res) => {
+router.post('/', checkToken, async (req, res) => {
   try {
+    req.body.fk_empresa = req.empresaId
     const result = await create(req.body);
     res.json(result);
   } catch (error) {

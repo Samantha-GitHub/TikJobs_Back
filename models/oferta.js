@@ -86,10 +86,11 @@ const create = ({
   country,
   starting_date,
   hour_week,
+  fk_empresa,
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'INSERT INTO ofertas_trabajos (function_department,responsabilities,city,country,starting_date,hour_week) VALUES (?, ?, ?, ?, ?, ?)',
+      'INSERT INTO ofertas_trabajos (function_department,responsabilities,city,country,starting_date,hour_week, fk_empresa) VALUES (?, ?, ?, ?, ?, ?,?)',
       [
         function_department,
         responsabilities,
@@ -97,6 +98,7 @@ const create = ({
         country,
         starting_date,
         hour_week,
+        fk_empresa
 
       ],
       (err, result) => {
