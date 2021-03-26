@@ -1,7 +1,7 @@
 const {
   getAll,
   create,
-  deleteById,
+  deleteByIdToken,
   updateById,
   getById,
   getByCountry,
@@ -17,6 +17,8 @@ const {
 } = require('../../models/languages')
 
 const router = require('express').Router();
+const { checkToken } = require('../middlewares');
+
 
 // Recupera todos los job offers y devuelve JSON
 router.get('/', async (req, res) => {
@@ -69,8 +71,9 @@ router.get('/joboffer/:name', async (req, res) => {
 
 // Crear un nuevo job offer
 // Los datos para crear job offer, me llegan a través del BODY
-router.post('/', async (req, res) => {
+router.post('/', checkToken, async (req, res) => {
   try {
+    req.body.fk_empresa = req.empresaId
     const result = await create(req.body);
     res.json(result);
   } catch (error) {
@@ -79,9 +82,11 @@ router.post('/', async (req, res) => {
 });
 
 // Borro un job offer
-router.delete('/:idJob_offer', async (req, res) => {
+router.delete('/', checkToken, async (req, res) => {
   try {
-    const result = await deleteById(req.params.idJob_offer);
+    console.log(req.body);
+    req.body.fk_empresa = req.empresaId
+    const result = await deleteByIdToken(req.body);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });
