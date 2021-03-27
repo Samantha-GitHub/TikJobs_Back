@@ -148,10 +148,11 @@ router.post('/', async (req, res) => {
 });
 
 // Borro un freelancer
-router.delete('/:idFreelancer', async (req, res) => {
+router.delete('/', checkToken, async (req, res) => {
   try {
-    const result = await deleteById(req.params.idFreelancer);
-    res.json(result);
+    const freelancer = await deleteById(req.userId);
+
+    res.json(freelancer);
   } catch (error) {
     res.status(422).json({ error: error.message });
   }

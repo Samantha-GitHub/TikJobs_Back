@@ -98,8 +98,7 @@ const create = ({
         country,
         starting_date,
         hour_week,
-        fk_empresa
-
+        fk_empresa,
       ],
       (err, result) => {
         if (err) return reject(err);
@@ -139,12 +138,26 @@ const updateById = ({
   });
 };
 
-// DELETE JOB OFFER
+// DELETE ONE JOB OFFER
 const deleteByIdToken = ({ id, fk_empresa }) => {
   return new Promise((resolve, reject) => {
     db.query(
       'DELETE from ofertas_trabajos WHERE id = ? AND fk_empresa = ?',
       [id, fk_empresa],
+      (err, result) => {
+        if (err) return reject(err);
+        resolve(result);
+      }
+    );
+  });
+};
+
+// DELETE JOB OFFER
+const deleteAll = ({ fk_empresa }) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'DELETE from ofertas_trabajos WHERE AND fk_empresa = ?',
+      [fk_empresa],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);
@@ -161,5 +174,6 @@ module.exports = {
   getById,
   getByCountry,
   searchData,
-  getByIdOffer
+  getByIdOffer,
+  deleteAll,
 };

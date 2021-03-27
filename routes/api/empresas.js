@@ -7,22 +7,14 @@ const {
   getJobOfferByIdCompany,
   getByEmail,
 
-
   /* getCompanyDetailByJobOffer */
 } = require('../../models/empresa');
 
-const {
-  getByIdOffer
+const { getByIdOffer } = require('../../models/oferta');
 
-} = require('../../models/oferta');
+const { getSkillsByIdJobsOffers } = require('../../models/skill');
 
-const {
-  getSkillsByIdJobsOffers
-} = require('../../models/skill')
-
-const {
-  getLanguagesByIdJobsOffers
-} = require('../../models/languages')
+const { getLanguagesByIdJobsOffers } = require('../../models/languages');
 
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
@@ -36,19 +28,20 @@ const { checkToken } = require('../middlewares');
 router.post('/login', async (req, res) => {
   // Compruebo si el email está en la BD
   const company = await getByEmail(req.body.email);
+  console.log(company);
   if (company) {
     // Compruebo si las password coinciden
     const iguales = bcrypt.compareSync(req.body.password, company.password);
     if (iguales) {
       res.json({
-        success: 'Login correcto!!',
+        success: 'Welcome back!!',
         token: createToken(company),
       });
     } else {
-      res.json({ error: 'Error en email y/o password' });
+      res.json({ error: 'Wrong email or password' });
     }
   } else {
-    res.json({ error: 'Error en email y/o password' });
+    res.json({ error: 'Wrong email or password' });
   }
 });
 
@@ -63,7 +56,7 @@ function createToken(pCompany) {
 
     caduca: dayjs().add(10, 'hours').unix(),
   };
-
+  console.log(data);
   return jwt.sign(data, 'tikjobs');
 }
 
@@ -87,7 +80,7 @@ router.get('/profile', checkToken, async (req, res) => {
   try {
     const company = await getById(req.empresaId);
     const jobOffer = await getJobOfferByIdCompany(req.empresaId);
-    company.jobOffer = jobOffer
+    company.jobOffer = jobOffer;
     /*  const skills = await getSkillsByIdJobsOffers(req.empresaId);
      const languages = await getLanguagesByIdJobsOffers(req.empresaId);
      jobOffer.skills = skills;
@@ -95,8 +88,6 @@ router.get('/profile', checkToken, async (req, res) => {
     res.json(company);
     /* console.log('req.empresaId', req.empresaId);
     console.log(company); */
-
-
   } catch (error) {
     /* console.log(error); */
     res.json({ error: error.message });
@@ -151,9 +142,9 @@ router.post('/', async (req, res) => {
 });
 
 // Borro un company
-router.delete('/:idCompany', async (req, res) => {
+router.delete('/', checkToken, async (req, res) => {
   try {
-    const result = await deleteById(req.params.idCompany);
+    const result = await deleteById(req.empresaId);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });

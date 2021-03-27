@@ -6,6 +6,7 @@ const {
   getById,
   getByCountry,
   searchData,
+  deleteAll,
 } = require('../../models/oferta');
 
 const { getSkillsByIdJobsOffers } = require('../../models/skill');
@@ -74,6 +75,18 @@ router.post('/', checkToken, async (req, res) => {
     res.status(422).json({ error: error.message });
   }
 });
+
+// Borro todos los job offer
+// router.delete('/', checkToken, async (req, res) => {
+//   try {
+//     // console.log(req.body);
+//     req.body.fk_empresa = req.empresaId;
+//     const result = await deleteAll(req.body);
+//     res.json(result);
+//   } catch (error) {
+//     res.status(422).json({ error: error.message });
+//   }
+// });
 
 // Borro un job offer
 router.delete('/', checkToken, async (req, res) => {
