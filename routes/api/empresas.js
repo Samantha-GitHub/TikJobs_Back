@@ -151,13 +151,14 @@ router.delete('/', checkToken, async (req, res) => {
   }
 });
 
-// Actualizo un company
-router.put('/update', checkToken, async (req, res) => {
+// Actualizo una company
+router.put('/', checkToken, async (req, res) => {
   /*  console.log(req.body); */
   try {
     // WE CANT UPDATE AN ALREADY HASHED PASSWORD. GOTTTA CREATE A NEW ONE
     // req.body.password = bcrypt.hashSync(req.body.password, 10);
-    const result = await updateById(req.empresaId);
+    req.body.id = req.empresaId;
+    const result = await updateById(req.body);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });
