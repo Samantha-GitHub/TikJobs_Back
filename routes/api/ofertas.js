@@ -55,7 +55,7 @@ router.get('/:idJobOffer', async (req, res) => {
 
 // Recupera job offers by SEARCH
 router.get('/joboffer/:name', async (req, res) => {
-  console.log(req.params.name);
+  /*  console.log(req.params.name); */
   try {
     const jobOffer = await searchData(req.params.name);
     res.json(jobOffer);
@@ -91,7 +91,7 @@ router.post('/', checkToken, async (req, res) => {
 // Borro un job offer
 router.delete('/', checkToken, async (req, res) => {
   try {
-    console.log(req.body);
+    /* console.log(req.body); */
     req.body.fk_empresa = req.empresaId;
     const result = await deleteByIdToken(req.body);
     res.json(result);
