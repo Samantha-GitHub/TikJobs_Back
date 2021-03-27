@@ -152,7 +152,7 @@ const deleteByIdToken = ({ id, fk_empresa }) => {
   });
 };
 
-// DELETE JOB OFFER
+// DELETE ALL JOBS OFFERS
 const deleteAll = ({ fk_empresa }) => {
   return new Promise((resolve, reject) => {
     db.query(
