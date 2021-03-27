@@ -159,9 +159,9 @@ router.delete('/', checkToken, async (req, res) => {
 });
 
 // Actualizo un freelancer
-router.put('/update', checkToken, async (req, res) => {
+router.put('/', checkToken, async (req, res) => {
   try {
-    const result = await updateById(req.body);
+    const result = await updateById(req.userId);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });
