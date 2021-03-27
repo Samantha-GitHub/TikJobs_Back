@@ -111,7 +111,7 @@ const updateById = ({
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'UPDATE usuario set firstname = ?, lastname = ?, email = ?, phone = ?, gender = ?, country = ?, city = ?, zipcode = ?, streetName = ?, website = ?, image = ?, video = ?, job_title = ?, image = ?, profile = ?, password = ? , username = ?,  WHERE id = ?',
+      'UPDATE usuario set firstname = ?, lastname = ?, email = ?, phone = ?, gender = ?, country = ?, city = ?, zipcode = ?, streetName = ?, website = ?, image = ?, video = ?, job_title = ?, profile = ?, password = ? , username = ?  WHERE id = ?',
       [
         firstname,
         lastname,

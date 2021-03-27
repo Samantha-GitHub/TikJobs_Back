@@ -151,7 +151,6 @@ router.post('/', async (req, res) => {
 router.delete('/', checkToken, async (req, res) => {
   try {
     const freelancer = await deleteById(req.userId);
-
     res.json(freelancer);
   } catch (error) {
     res.status(422).json({ error: error.message });
@@ -161,7 +160,8 @@ router.delete('/', checkToken, async (req, res) => {
 // Actualizo un freelancer
 router.put('/', checkToken, async (req, res) => {
   try {
-    const result = await updateById(req.userId);
+    req.body.id = req.userId;
+    const result = await updateById(req.body);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });
