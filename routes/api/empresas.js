@@ -28,7 +28,7 @@ const { checkToken } = require('../middlewares');
 router.post('/login', async (req, res) => {
   // Compruebo si el email está en la BD
   const company = await getByEmail(req.body.email);
-  console.log(company);
+  /*   console.log(company); */
   if (company) {
     // Compruebo si las password coinciden
     const iguales = bcrypt.compareSync(req.body.password, company.password);
@@ -96,7 +96,7 @@ router.get('/profile', checkToken, async (req, res) => {
 
 // Recupera UNA unica empresa by ID
 router.get('/:idCompany', async (req, res) => {
-  console.log(req.params);
+  /*  console.log(req.params); */
 
   try {
     const company = await getById(req.params.idCompany);
@@ -153,7 +153,7 @@ router.delete('/', checkToken, async (req, res) => {
 
 // Actualizo un company
 router.put('/update', checkToken, async (req, res) => {
-  console.log(req.body);
+  /*  console.log(req.body); */
   try {
     // WE CANT UPDATE AN ALREADY HASHED PASSWORD. GOTTTA CREATE A NEW ONE
     // req.body.password = bcrypt.hashSync(req.body.password, 10);
