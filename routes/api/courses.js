@@ -1,12 +1,13 @@
 const {
   create,
   updateById,
-  deleteById,
+  deleteByIdToken,
   getCoursesByIdFreelance,
 } = require('../../models/course');
 
 const router = require('express').Router();
 const { checkToken } = require('../middlewares');
+
 // Recupera todos los courses de un freelance y devuelve JSON
 router.get('/:pId', async (req, res) => {
   // Id de company inyectado por el Middleware checkToken!
@@ -33,9 +34,14 @@ router.post('/', checkToken, async (req, res) => {
 });
 
 // Borro un Course
-router.delete('/:idCourse', async (req, res) => {
+router.delete('/:idCourse', checkToken, async (req, res) => {
   try {
-    const result = await deleteById(req.params.idCourse);
+    const json = {
+      id: req.params.idCourse,
+      fk_usuario: req.userId,
+    };
+    console.log(json);
+    const result = await deleteByIdToken(json);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });

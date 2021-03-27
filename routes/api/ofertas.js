@@ -91,14 +91,12 @@ router.post('/', checkToken, async (req, res) => {
 // Borro un job offer
 router.delete('/:jobOfferId', checkToken, async (req, res) => {
   try {
-
     const json = {
       id: req.params.jobOfferId,
-      fk_empresa: req.empresaId
-    }
+      fk_empresa: req.empresaId,
+    };
     const result = await deleteByIdToken(json);
     res.json(result);
-
   } catch (error) {
     res.status(422).json({ error: error.message });
   }

@@ -80,18 +80,22 @@ const updateById = ({
 };
 
 // DELETE COURSE
-const deleteById = (pId) => {
+const deleteByIdToken = ({ id, fk_usuario }) => {
   return new Promise((resolve, reject) => {
-    db.query('DELETE from courses WHERE id = ?', [pId], (err, result) => {
-      if (err) return reject(err);
-      resolve(result);
-    });
+    db.query(
+      'DELETE from courses WHERE id = ? AND fk_usuario = ?',
+      [id, fk_usuario],
+      (err, result) => {
+        if (err) return reject(err);
+        resolve(result);
+      }
+    );
   });
 };
 
 module.exports = {
   create,
   updateById,
-  deleteById,
+  deleteByIdToken,
   getCoursesByIdFreelance,
 };

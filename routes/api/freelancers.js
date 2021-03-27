@@ -150,7 +150,8 @@ router.post('/', async (req, res) => {
 // Borro un freelancer
 router.delete('/', checkToken, async (req, res) => {
   try {
-    const freelancer = await deleteById(req.userId);
+    req.body.id = req.userId;
+    const freelancer = await deleteById(req.body);
     res.json(freelancer);
   } catch (error) {
     res.status(422).json({ error: error.message });
