@@ -76,7 +76,7 @@ router.post('/', checkToken, async (req, res) => {
   }
 });
 
-// Borro todos los job offer
+// Borro todos los jobs offers
 // router.delete('/', checkToken, async (req, res) => {
 //   try {
 //     // console.log(req.body);
@@ -89,12 +89,16 @@ router.post('/', checkToken, async (req, res) => {
 // });
 
 // Borro un job offer
-router.delete('/', checkToken, async (req, res) => {
+router.delete('/:jobOfferId', checkToken, async (req, res) => {
   try {
-    /* console.log(req.body); */
-    req.body.fk_empresa = req.empresaId;
-    const result = await deleteByIdToken(req.body);
+
+    const json = {
+      id: req.params.jobOfferId,
+      fk_empresa: req.empresaId
+    }
+    const result = await deleteByIdToken(json);
     res.json(result);
+
   } catch (error) {
     res.status(422).json({ error: error.message });
   }
