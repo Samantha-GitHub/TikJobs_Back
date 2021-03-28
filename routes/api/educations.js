@@ -1,7 +1,7 @@
 const {
   create,
   updateById,
-  deleteById,
+  deleteByIdToken,
   getEducationsByIdFreelance,
 } = require('../../models/education');
 
@@ -34,9 +34,13 @@ router.post('/', checkToken, async (req, res) => {
 });
 
 // Borro un Education
-router.delete('/:idEducation', async (req, res) => {
+router.delete('/:idEducation', checkToken, async (req, res) => {
   try {
-    const result = await deleteById(req.params.idEducation);
+    const json = {
+      id: req.params.idEducation,
+      fk_usuario: req.userId,
+    };
+    const result = await deleteByIdToken(json);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });

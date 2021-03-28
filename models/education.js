@@ -60,18 +60,22 @@ const updateById = ({
 };
 
 // DELETE education
-const deleteById = (pId) => {
+const deleteByIdToken = ({ id, fk_usuario }) => {
   return new Promise((resolve, reject) => {
-    db.query('DELETE from education WHERE id = ?', [pId], (err, result) => {
-      if (err) return reject(err);
-      resolve(result);
-    });
+    db.query(
+      'DELETE from education WHERE id = ? AND fk_usuario = ?',
+      [id, fk_usuario],
+      (err, result) => {
+        if (err) return reject(err);
+        resolve(result);
+      }
+    );
   });
 };
 
 module.exports = {
   create,
   updateById,
-  deleteById,
+  deleteByIdToken,
   getEducationsByIdFreelance,
 };

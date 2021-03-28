@@ -86,11 +86,11 @@ const updateById = ({
 };
 
 // DELETE profesional_experience
-const deleteById = (pId) => {
+const deleteByIdToken = ({ id, fk_usuario }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'DELETE from profesional_experience WHERE id = ?',
-      [pId],
+      'DELETE from profesional_experience WHERE id = ? AND fk_usuario = ?',
+      [id, fk_usuario],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);
@@ -102,6 +102,6 @@ const deleteById = (pId) => {
 module.exports = {
   create,
   updateById,
-  deleteById,
+  deleteByIdToken,
   getProfesionalExperienceByIdFreelance,
 };

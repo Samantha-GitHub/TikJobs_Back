@@ -1,7 +1,7 @@
 const {
   getProfesionalExperienceByIdFreelance,
   create,
-  deleteById,
+  deleteByIdToken,
   updateById,
 } = require('../../models/profesional_experience');
 
@@ -36,9 +36,13 @@ router.post('/', checkToken, async (req, res) => {
 });
 
 // Borro un Profesional Experience
-router.delete('/:idProfesionalExperience', async (req, res) => {
+router.delete('/:idProfesionalExperience', checkToken, async (req, res) => {
   try {
-    const result = await deleteById(req.params.idProfesionalExperience);
+    const json = {
+      id: req.params.idProfesionalExperience,
+      fk_usuario: req.userId,
+    };
+    const result = await deleteByIdToken(json);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });
