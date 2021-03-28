@@ -15,6 +15,22 @@ const getEducationsByIdFreelance = (pId) => {
   });
 };
 
+// GET SEARCH LIKE
+let searchEducation = (name) => {
+  return new Promise((resolve, reject) => {
+    const searchEducation = `SELECT * FROM education WHERE degree LIKE '%${name}%' OR school '%${name}%' `;
+    //searchValues = [search,search,search,search]
+
+    db.query(searchEducation, function (errQuery, resQuery) {
+      if (errQuery) {
+        return reject(errQuery);
+      } else {
+        resolve(resQuery);
+      }
+    });
+  });
+};
+
 // NEW education
 const create = ({
   degree,
@@ -74,4 +90,5 @@ module.exports = {
   updateById,
   deleteById,
   getEducationsByIdFreelance,
+  searchEducation
 };

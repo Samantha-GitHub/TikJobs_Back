@@ -124,6 +124,17 @@ router.get('/:idFreelancer', async (req, res) => {
   }
 });
 
+// Recupera freelance by SEARCH
+router.get('/search/:name', async (req, res) => {
+  /*  console.log(req.params.name); */
+  try {
+    const freelancer = await searchFreelance(req.params.name);
+    res.json(freelancer);
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
+
 // Recupera UN unico freelancers by ID para editar
 router.get('/edit', async (req, res) => {
   try {
