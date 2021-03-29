@@ -45,6 +45,7 @@ let searchFreelance = (name) => {
 };
 
 
+
 // SEARCH EDUCATION DE FREELANCERS
 let searchFreelanceEducation = (name) => {
   return new Promise((resolve, reject) => {
