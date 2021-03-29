@@ -8,6 +8,10 @@ const {
   searchData,
   deleteAll,
 } = require('../../models/oferta');
+const {
+  searchFreelance
+
+} = require('../../models/freelancer')
 
 const { getSkillsByIdJobsOffers } = require('../../models/skill');
 
@@ -58,7 +62,13 @@ router.get('/joboffer/:name', async (req, res) => {
   /*  console.log(req.params.name); */
   try {
     const jobOffer = await searchData(req.params.name);
-    res.json(jobOffer);
+    const freelanceSerch = await searchFreelance(req.params.name);
+    /* Crear una query para cada busqueda + mandar todo en un objeto al front */
+    const result = {
+      job: jobOffer,
+      freelance: freelanceSerch
+    }
+    res.json(result);
   } catch (error) {
     res.json({ error: error.message });
   }
