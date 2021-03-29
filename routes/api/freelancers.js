@@ -152,7 +152,7 @@ router.get('/edit', async (req, res) => {
   }
 });
 
-// Crear un nuevo freelancer
+// Crear un nuevo freelancer CON MULTER
 // Los datos para crear el freelancer, me llegan a través del BODY
 router.post('/', upload.single('image'), async (req, res) => {
   // console.log(req.body);
@@ -177,18 +177,18 @@ router.post('/', upload.single('image'), async (req, res) => {
     res.status(422).json({ error: error.message });
   }
 });
-/* 
-router.post('/upload', upload.single('imagen'), async (req, res) => {
-
-
-  try {
-    const newImagen = await image(newName);
-    console.log(req.body);
-    res.json(newImagen);
-  } catch (err) {
-    res.json(err);
-  }
-}); */
+// Crear un nuevo freelancer
+// Los datos para crear el freelancer, me llegan a través del BODY
+// router.post('/', async (req, res) => {
+//   // console.log(req.body);
+//   try {
+//     req.body.password = bcrypt.hashSync(req.body.password, 10);
+//     const result = await create(req.body);
+//     res.json(result);
+//   } catch (error) {
+//     res.status(422).json({ error: error.message });
+//   }
+// });
 
 // Borro un freelancer
 router.delete('/', checkToken, async (req, res) => {
