@@ -129,7 +129,6 @@ router.get('/:idFreelancer', async (req, res) => {
 router.get('/search/:name', async (req, res) => {
   /*  console.log(req.params.name); */
   try {
-    // const freelancer = await searchFreelance(req.params.name);
     const freelancer = await searchFreelanceEducation(req.params.name);
     res.json(freelancer);
   } catch (error) {

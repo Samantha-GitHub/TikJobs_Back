@@ -4,10 +4,15 @@ const {
   deleteByIdToken,
   updateById,
   getById,
-  getByCountry,
   searchData,
   deleteAll,
 } = require('../../models/oferta');
+
+const {
+  searchFreelance,
+  searchFreelanceEducation
+
+} = require('../../models/freelancer')
 
 const { getSkillsByIdJobsOffers } = require('../../models/skill');
 
@@ -43,19 +48,21 @@ router.get('/:idJobOffer', async (req, res) => {
   }
 });
 
-// Recupera job offers by COUNTRY
-// router.get('/joboffer/:name', async (req, res) => {
-//   try {
-//     const jobOffer = await getByCountry(req.params.CountryJobOffer);
-//     res.json(jobOffer);
-//   } catch (error) {
-//     res.json({ error: error.message });
-//   }
-// });
-
 // Recupera job offers by SEARCH
 router.get('/joboffer/:name', async (req, res) => {
   /*  console.log(req.params.name); */
+  //try {
+  //const jobOffer = await searchData(req.params.name);
+  //const freelanceSerch = await searchFreelance(req.params.name);
+  //const freelanceEducationSearch = await searchFreelanceEducation(req.params.name)
+  /* Crear una query para cada busqueda + mandar todo en un objeto al front */
+
+  //const result = {
+  //  job: jobOffer,
+  //freelance: freelanceSerch,
+  //freelanceEducation: freelanceEducationSearch
+  //}
+  //res.json(result);
   try {
     const jobOffer = await searchData(req.params.name);
     res.json(jobOffer);

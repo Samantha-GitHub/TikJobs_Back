@@ -27,11 +27,11 @@ const updateById = (fk_usuario, fk_languages, id) => {
 };
 
 // DELETE fk_languages con fk_usuario
-const deleteById = (pId) => {
+const deleteById = (id) => {
   return new Promise((resolve, reject) => {
     db.query(
       'DELETE from tbi_languages_usuario WHERE id = ?',
-      [pId],
+      [id],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);
