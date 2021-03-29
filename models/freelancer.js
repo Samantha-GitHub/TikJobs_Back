@@ -44,6 +44,24 @@ let searchFreelance = (name) => {
   });
 };
 
+
+// SEARCH EDUCATION DE FREELANCERS
+let searchFreelanceEducation = (name) => {
+  return new Promise((resolve, reject) => {
+    const searchFreelanceEducation = `SELECT usuario.* FROM usuario JOIN education ON usuario.id= fk_usuario AND school LIKE '%${name}%' OR degree LIKE '%${name}%' `;
+
+    db.query(searchFreelanceEducation, function (errQuery, resQuery) {
+      if (errQuery) {
+        return reject(errQuery);
+      } else {
+        resolve(resQuery);
+      }
+    });
+  });
+};
+
+
+
 // NEW FREELANCE
 const create = ({
   firstname,
@@ -172,5 +190,6 @@ module.exports = {
   deleteById,
   getById,
   getByEmail,
-  searchFreelance
+  searchFreelance,
+  searchFreelanceEducation
 };
