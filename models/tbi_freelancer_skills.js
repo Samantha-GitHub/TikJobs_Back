@@ -1,9 +1,9 @@
 // NEW fk_skill con fk_usuario
-const create = (fk_usuario, fk_skill) => {
+const create = (fk_skill, fk_usuario) => {
   return new Promise((resolve, reject) => {
     db.query(
       'INSERT INTO tbi_skills_usuario (fk_skill, fk_usuario) VALUES (?,?)',
-      [fk_usuario, fk_skill],
+      [fk_skill, fk_usuario],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);

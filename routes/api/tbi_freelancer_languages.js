@@ -8,8 +8,9 @@ const router = require('express').Router();
 
 // Crear fk_usuario con fk_language
 router.post('/', async (req, res) => {
+  console.log(req.body);
   try {
-    const result = await create(req.body.language, req.body.freelance);
+    const result = await create(req.body.freelance, req.body.language);
     res.json(result);
   } catch (error) {
     res.status(422).json({ error: error.message });
