@@ -88,7 +88,7 @@ router.get('/profile', checkToken, async (req, res) => {
     const education = await getEducationsByIdFreelance(req.userId);
 
     const language = await getLanguagesByIdFreelance(req.userId);
-    console.log('soy langyage', language);
+    console.log('soy language', language);
     const skill = await getSkillsByIdFreelance(req.userId);
 
     const experience = await getProfesionalExperienceByIdFreelance(req.userId);
