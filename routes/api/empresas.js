@@ -180,9 +180,36 @@ router.delete('/', checkToken, async (req, res) => {
   }
 });
 
+// // Actualizo una company
+// router.put('/', checkToken, async (req, res) => {
+//   /*  console.log(req.body); */
+//   try {
+//     // WE CANT UPDATE AN ALREADY HASHED PASSWORD. GOTTTA CREATE A NEW ONE
+//     // req.body.password = bcrypt.hashSync(req.body.password, 10);
+//     req.body.id = req.empresaId;
+//     const result = await updateById(req.body);
+//     res.json(result);
+//   } catch (error) {
+//     res.status(422).json({ error: error.message });
+//     console.log(error);
+//   }
+// });
+
 // Actualizo una company
-router.put('/', checkToken, async (req, res) => {
+router.put('/', upload.single('image'), checkToken, async (req, res) => {
   /*  console.log(req.body); */
+  // Antes de guardar el producto en la base de datos, modificamos la imagen para situarla donde nos interesa
+  const extension = '.' + req.file.mimetype.split('/')[1];
+
+  // Obtengo el nombre de la nueva imagen
+  const newName = req.file.filename + extension;
+  // Obtengo la ruta donde estará, adjuntándole la extensión
+  const newPath = req.file.path + extension;
+  // Muevo la imagen para que resiba la extensión
+  fs.renameSync(req.file.path, newPath);
+
+  // Modifico el BODY para poder incluir el nombre de la imagen en la BD
+  req.body.image = newName;
   try {
     // WE CANT UPDATE AN ALREADY HASHED PASSWORD. GOTTTA CREATE A NEW ONE
     // req.body.password = bcrypt.hashSync(req.body.password, 10);
