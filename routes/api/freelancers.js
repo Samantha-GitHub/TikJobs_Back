@@ -88,7 +88,7 @@ router.get('/profile', checkToken, async (req, res) => {
     const education = await getEducationsByIdFreelance(req.userId);
 
     const language = await getLanguagesByIdFreelance(req.userId);
-
+    console.log('soy langyage', language);
     const skill = await getSkillsByIdFreelance(req.userId);
 
     const experience = await getProfesionalExperienceByIdFreelance(req.userId);
@@ -151,7 +151,7 @@ router.get('/edit', async (req, res) => {
     res.json({ error: error.message });
   }
 });
-
+/* 
 // Crear un nuevo freelancer CON MULTER
 // Los datos para crear el freelancer, me llegan a través del BODY
 router.post('/', upload.single('image'), async (req, res) => {
@@ -176,19 +176,20 @@ router.post('/', upload.single('image'), async (req, res) => {
   } catch (error) {
     res.status(422).json({ error: error.message });
   }
-});
+}); */
+
 // Crear un nuevo freelancer
 // Los datos para crear el freelancer, me llegan a través del BODY
-// router.post('/', async (req, res) => {
-//   // console.log(req.body);
-//   try {
-//     req.body.password = bcrypt.hashSync(req.body.password, 10);
-//     const result = await create(req.body);
-//     res.json(result);
-//   } catch (error) {
-//     res.status(422).json({ error: error.message });
-//   }
-// });
+router.post('/', async (req, res) => {
+  // console.log(req.body);
+  try {
+    req.body.password = bcrypt.hashSync(req.body.password, 10);
+    const result = await create(req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(422).json({ error: error.message });
+  }
+});
 
 // Borro un freelancer
 router.delete('/', checkToken, async (req, res) => {
@@ -201,8 +202,31 @@ router.delete('/', checkToken, async (req, res) => {
   }
 });
 
-// Actualizo un freelancer
+/* // Actualizo un freelancer
 router.put('/', checkToken, async (req, res) => {
+  try {
+    req.body.id = req.userId;
+    const result = await updateById(req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(422).json({ error: error.message });
+  }
+}); */
+
+// Actualizo un freelancer WITH MULTER
+router.put('/', upload.single('image'), checkToken, async (req, res) => {
+  // Antes de guardar el producto en la base de datos, modificamos la imagen para situarla donde nos interesa
+  const extension = '.' + req.file.mimetype.split('/')[1];
+
+  // Obtengo el nombre de la nueva imagen
+  const newName = req.file.filename + extension;
+  // Obtengo la ruta donde estará, adjuntándole la extensión
+  const newPath = req.file.path + extension;
+  // Muevo la imagen para que resiba la extensión
+  fs.renameSync(req.file.path, newPath);
+
+  // Modifico el BODY para poder incluir el nombre de la imagen en la BD
+  req.body.image = newName;
   try {
     req.body.id = req.userId;
     const result = await updateById(req.body);

@@ -22,6 +22,11 @@ const dayjs = require('dayjs');
 const jwt = require('jsonwebtoken');
 const { checkToken } = require('../middlewares');
 
+// MULTER IMAGE HANDLER
+const multer = require('multer');
+const upload = multer({ dest: 'public/images' });
+const fs = require('fs');
+
 /* TOKEN Y MIDDLEWARE */
 
 // Body -> email, password
@@ -129,9 +134,33 @@ router.get('/:idCompany', async (req, res) => {
   }
 });
 
-// Crear un nuevo company
+/* // Crear un nuevo company
 // Los datos para crear el company, me llegan a través del BODY
 router.post('/', async (req, res) => {
+  try {
+    req.body.password = bcrypt.hashSync(req.body.password, 10);
+    const result = await create(req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(422).json({ error: error.message });
+  }
+}); */
+
+// Crear un nuevo company WITH MULTER
+// Los datos para crear el company, me llegan a través del BODY
+router.post('/', upload.single('image'), async (req, res) => {
+  // Antes de guardar el producto en la base de datos, modificamos la imagen para situarla donde nos interesa
+  const extension = '.' + req.file.mimetype.split('/')[1];
+
+  // Obtengo el nombre de la nueva imagen
+  const newName = req.file.filename + extension;
+  // Obtengo la ruta donde estará, adjuntándole la extensión
+  const newPath = req.file.path + extension;
+  // Muevo la imagen para que resiba la extensión
+  fs.renameSync(req.file.path, newPath);
+
+  // Modifico el BODY para poder incluir el nombre de la imagen en la BD
+  req.body.image = newName;
   try {
     req.body.password = bcrypt.hashSync(req.body.password, 10);
     const result = await create(req.body);
