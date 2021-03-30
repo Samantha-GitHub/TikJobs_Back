@@ -71,7 +71,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Recupera UNA unica empresa by ID para pintando por TOKEN
+// Recupera UNA unica freelance by ID para pintando por TOKEN
 router.get('/profile', checkToken, async (req, res) => {
   try {
     const freelancer = await getById(req.userId);
