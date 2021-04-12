@@ -6,7 +6,7 @@ const {
 
 const router = require('express').Router();
 
-// Crear fk_usuario con fk_language
+// create fk_usuario with fk_language
 router.post('/', async (req, res) => {
   console.log(req.body);
   try {
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Actualizar fk_usuario y fk_language
+// update fk_usuario and fk_language
 router.put('/', async (req, res) => {
   try {
     const result = await updateById(req.body.language, req.body.freelance);
@@ -27,7 +27,7 @@ router.put('/', async (req, res) => {
   }
 });
 
-// Borrar fk_ofertas_trabajos y fk_language
+// delete fk_ofertas_trabajos and fk_language
 router.delete('/:id', async (req, res) => {
   try {
     const result = await deleteById(req.params.id);

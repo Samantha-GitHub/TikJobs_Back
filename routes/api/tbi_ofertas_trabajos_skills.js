@@ -6,7 +6,7 @@ const {
 
 const router = require('express').Router();
 
-// Crear fk_ofertas_trabajos con fk_skills
+// create fk_ofertas_trabajos with fk_skills
 router.post('/', async (req, res) => {
   console.log(req.body);
   try {
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Actualizar fk_ofertas_trabajos y fk_skills
+// update fk_ofertas_trabajos and fk_skills
 router.put('/', async (req, res) => {
   try {
     const result = await updateById(req.body);
@@ -27,7 +27,7 @@ router.put('/', async (req, res) => {
   }
 });
 
-// Borrar fk_ofertas_trabajos y fk_skills
+// delete fk_ofertas_trabajos and fk_skills
 router.delete('/:id', async (req, res) => {
   try {
     const result = await deleteById(req.params.id);

@@ -10,9 +10,8 @@ const {
 
 const {
   searchFreelance,
-  searchFreelanceEducation
-
-} = require('../../models/freelancer')
+  searchFreelanceEducation,
+} = require('../../models/freelancer');
 
 const { getSkillsByIdJobsOffers } = require('../../models/skill');
 
@@ -21,9 +20,8 @@ const { getLanguagesByIdJobsOffers } = require('../../models/languages');
 const router = require('express').Router();
 const { checkToken } = require('../middlewares');
 
-// Recupera todos los job offers y devuelve JSON
+// get all job offers
 router.get('/', async (req, res) => {
-  // Id de job Offer inyectado por el Middleware checkToken!
   // console.log(req.job_offerId);
 
   try {
@@ -48,21 +46,8 @@ router.get('/:idJobOffer', async (req, res) => {
   }
 });
 
-// Recupera job offers by SEARCH
+// get job offers by SEARCH
 router.get('/joboffer/:name', async (req, res) => {
-  /*  console.log(req.params.name); */
-  //try {
-  //const jobOffer = await searchData(req.params.name);
-  //const freelanceSerch = await searchFreelance(req.params.name);
-  //const freelanceEducationSearch = await searchFreelanceEducation(req.params.name)
-  /* Crear una query para cada busqueda + mandar todo en un objeto al front */
-
-  //const result = {
-  //  job: jobOffer,
-  //freelance: freelanceSerch,
-  //freelanceEducation: freelanceEducationSearch
-  //}
-  //res.json(result);
   try {
     const jobOffer = await searchData(req.params.name);
     res.json(jobOffer);
@@ -71,8 +56,7 @@ router.get('/joboffer/:name', async (req, res) => {
   }
 });
 
-// Crear un nuevo job offer
-// Los datos para crear job offer, me llegan a través del BODY
+// create new job offer
 router.post('/', checkToken, async (req, res) => {
   try {
     req.body.fk_empresa = req.empresaId;
@@ -83,19 +67,7 @@ router.post('/', checkToken, async (req, res) => {
   }
 });
 
-// Borro todos los jobs offers
-// router.delete('/', checkToken, async (req, res) => {
-//   try {
-//     // console.log(req.body);
-//     req.body.fk_empresa = req.empresaId;
-//     const result = await deleteAll(req.body);
-//     res.json(result);
-//   } catch (error) {
-//     res.status(422).json({ error: error.message });
-//   }
-// });
-
-// Borro un job offer
+// delete a job offer
 router.delete('/:jobOfferId', checkToken, async (req, res) => {
   try {
     const json = {
@@ -109,7 +81,7 @@ router.delete('/:jobOfferId', checkToken, async (req, res) => {
   }
 });
 
-// Actualizo un job offers\
+// update a job offers\
 router.put('/', async (req, res) => {
   try {
     const result = await updateById(req.body);
@@ -118,13 +90,5 @@ router.put('/', async (req, res) => {
     res.status(422).json({ error: error.message });
   }
 });
-
-//GET http://localhost:3000/users/userId
-
-//POST http://localhost:3000/users
-
-//PUT http://localhost:3000/users/userId
-
-//DELETE http://localhost:3000/users/userId
 
 module.exports = router;

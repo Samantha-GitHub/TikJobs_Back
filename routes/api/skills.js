@@ -10,10 +10,8 @@ const {
 const router = require('express').Router();
 const { checkToken } = require('../middlewares');
 
-
-// Recupera todos los skills y devuelve JSON
+// get all skills
 router.get('/', async (req, res) => {
-  // Id de skill inyectado por el Middleware checkToken!
   // console.log(req.job_skillId);
 
   try {
@@ -24,9 +22,8 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Recupera todos los skills de un freelance y devuelve JSON
+// get all skills from a freelancer
 router.get('/:pId', async (req, res) => {
-  // Id de skill inyectado por el Middleware checkToken!
   // console.log(req.job_skillId);
 
   try {
@@ -37,9 +34,8 @@ router.get('/:pId', async (req, res) => {
   }
 });
 
-// Recupera todos los skills de un job offer y devuelve JSON
+// get all skills by id job offer
 router.get('/:pId', async (req, res) => {
-  // Id de skill inyectado por el Middleware checkToken!
   // console.log(req.job_skillId);
 
   try {
@@ -50,10 +46,8 @@ router.get('/:pId', async (req, res) => {
   }
 });
 
+// create a new skill
 
-
-// Crear un nuevo skill
-// Los datos para crear skill, me llegan a través del BODY
 router.post('/', async (req, res) => {
   try {
     const result = await create(req.body);
@@ -63,7 +57,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Borro un skill
+// delete a skill
 router.delete('/:idSkill', async (req, res) => {
   try {
     const result = await deleteById(req.params.idSkill);
@@ -73,7 +67,7 @@ router.delete('/:idSkill', async (req, res) => {
   }
 });
 
-// Actualizo un skills\
+// update a skills\
 router.put('/', async (req, res) => {
   try {
     const result = await updateById(req.body);
@@ -82,13 +76,5 @@ router.put('/', async (req, res) => {
     res.status(422).json({ error: error.message });
   }
 });
-
-//GET http://localhost:3000/users/userId
-
-//POST http://localhost:3000/users
-
-//PUT http://localhost:3000/users/userId
-
-//DELETE http://localhost:3000/users/userId
 
 module.exports = router;

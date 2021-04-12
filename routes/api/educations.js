@@ -8,11 +8,8 @@ const {
 const router = require('express').Router();
 const { checkToken } = require('../middlewares');
 
-// Recupera todos los educations de un freelance y devuelve JSON
+// all educations from a freelance
 router.get('/:pId', async (req, res) => {
-  // Id de education inyectado por el Middleware checkToken!
-  // console.log(req.courseId);
-
   try {
     const education = await getEducationsByIdFreelance(req.params.pId);
     res.json(education);

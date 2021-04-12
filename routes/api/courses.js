@@ -10,9 +10,6 @@ const { checkToken } = require('../middlewares');
 
 // get all courses from a freelance
 router.get('/:pId', async (req, res) => {
-  // Id de company inyectado por el Middleware checkToken!
-  // console.log(req.courseId);
-
   try {
     const course = await getCoursesByIdFreelance(req.params.pId);
     res.json(course);

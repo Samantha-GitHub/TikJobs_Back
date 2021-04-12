@@ -31,11 +31,9 @@ const fs = require('fs');
 
 // Body -> email, password
 router.post('/login', async (req, res) => {
-  // Compruebo si el email está en la BD
   const company = await getByEmail(req.body.email);
   /*   console.log(company); */
   if (company) {
-    // Compruebo si las password coinciden
     const iguales = bcrypt.compareSync(req.body.password, company.password);
     if (iguales) {
       res.json({
@@ -53,11 +51,6 @@ router.post('/login', async (req, res) => {
 function createToken(pCompany) {
   const data = {
     companyId: pCompany.id,
-
-    /* 
-        para  poder poner la caducidad a 15mins despues de la fecha de peticion hemos instalado la libreria dayjs con  npm install dayjs . 
-        unix es la unidad de mesura del tiempo
-    */
 
     caduca: dayjs().add(10, 'hours').unix(),
   };
@@ -86,15 +79,11 @@ router.get('/profile', checkToken, async (req, res) => {
     const company = await getById(req.empresaId);
     const jobOffer = await getJobOfferByIdCompany(req.empresaId);
     company.jobOffer = jobOffer;
-    /*  const skills = await getSkillsByIdJobsOffers(req.empresaId);
-     const languages = await getLanguagesByIdJobsOffers(req.empresaId);
-     jobOffer.skills = skills;
-     jobOffer.languages = languages; */
+
     res.json(company);
-    /* console.log('req.empresaId', req.empresaId);
-    console.log(company); */
+
+    // console.log(company);
   } catch (error) {
-    /* console.log(error); */
     res.json({ error: error.message });
   }
 });
@@ -111,17 +100,6 @@ router.get('/:idCompany', async (req, res) => {
   }
 });
 
-// Recupera El detalle de la empresa por oferta trabajo
-/* router.getCompanyDetailByJobOffer('/:idJobOffer', async (req, res) => {
-  try {
-    const jobOffer = await getById(req.params.idJobOffer);
-    res.json(jobOffer);
-  } catch (error) {
-    res.json({ error: error.message });
-  }
-}); */
-
-// Recupera todos los JOB OFFER de un company y devuelve JSON
 router.get('/:idCompany', async (req, res) => {
   // Id de company inyectado por el Middleware checkToken!
   // console.log(req.courseId);
@@ -134,32 +112,18 @@ router.get('/:idCompany', async (req, res) => {
   }
 });
 
-/* // Crear un nuevo company
-// Los datos para crear el company, me llegan a través del BODY
-router.post('/', async (req, res) => {
-  try {
-    req.body.password = bcrypt.hashSync(req.body.password, 10);
-    const result = await create(req.body);
-    res.json(result);
-  } catch (error) {
-    res.status(422).json({ error: error.message });
-  }
-}); */
+// create company WITH MULTER
 
-// Crear un nuevo company WITH MULTER
-// Los datos para crear el company, me llegan a través del BODY
 router.post('/', upload.single('image'), async (req, res) => {
-  // Antes de guardar el producto en la base de datos, modificamos la imagen para situarla donde nos interesa
   const extension = '.' + req.file.mimetype.split('/')[1];
 
-  // Obtengo el nombre de la nueva imagen
   const newName = req.file.filename + extension;
-  // Obtengo la ruta donde estará, adjuntándole la extensión
+
   const newPath = req.file.path + extension;
-  // Muevo la imagen para que resiba la extensión
+
   fs.renameSync(req.file.path, newPath);
 
-  // Modifico el BODY para poder incluir el nombre de la imagen en la BD
+  // including name of new picture to the DB
   req.body.image = newName;
   try {
     req.body.password = bcrypt.hashSync(req.body.password, 10);
@@ -180,39 +144,20 @@ router.delete('/', checkToken, async (req, res) => {
   }
 });
 
-// // Actualizo una company
-// router.put('/', checkToken, async (req, res) => {
-//   /*  console.log(req.body); */
-//   try {
-//     // WE CANT UPDATE AN ALREADY HASHED PASSWORD. GOTTTA CREATE A NEW ONE
-//     // req.body.password = bcrypt.hashSync(req.body.password, 10);
-//     req.body.id = req.empresaId;
-//     const result = await updateById(req.body);
-//     res.json(result);
-//   } catch (error) {
-//     res.status(422).json({ error: error.message });
-//     console.log(error);
-//   }
-// });
-
-// Actualizo una company
+// Actualizo una company using multer
 router.put('/', upload.single('image'), checkToken, async (req, res) => {
   /*  console.log(req.body); */
-  // Antes de guardar el producto en la base de datos, modificamos la imagen para situarla donde nos interesa
+
   const extension = '.' + req.file.mimetype.split('/')[1];
 
-  // Obtengo el nombre de la nueva imagen
   const newName = req.file.filename + extension;
-  // Obtengo la ruta donde estará, adjuntándole la extensión
+
   const newPath = req.file.path + extension;
-  // Muevo la imagen para que resiba la extensión
+
   fs.renameSync(req.file.path, newPath);
 
-  // Modifico el BODY para poder incluir el nombre de la imagen en la BD
   req.body.image = newName;
   try {
-    // WE CANT UPDATE AN ALREADY HASHED PASSWORD. GOTTTA CREATE A NEW ONE
-    // req.body.password = bcrypt.hashSync(req.body.password, 10);
     req.body.id = req.empresaId;
     const result = await updateById(req.body);
     res.json(result);
@@ -221,13 +166,5 @@ router.put('/', upload.single('image'), checkToken, async (req, res) => {
     console.log(error);
   }
 });
-
-//GET http://localhost:3000/users/userId
-
-//POST http://localhost:3000/users
-
-//PUT http://localhost:3000/users/userId
-
-//DELETE http://localhost:3000/users/userId
 
 module.exports = router;

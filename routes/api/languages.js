@@ -9,9 +9,8 @@ const {
 
 const router = require('express').Router();
 
-// Recupera todos los languages y devuelve JSON
+// get all languages
 router.get('/', async (req, res) => {
-  // Id de skill inyectado por el Middleware checkToken!
   // console.log(req.job_skillId);
 
   try {
@@ -22,9 +21,8 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Recupera todos los languages de un freelance y devuelve JSON
+// All languages from a freelance
 router.get('/:pId', async (req, res) => {
-  // Id de skill inyectado por el Middleware checkToken!
   // console.log(req.job_skillId);
 
   try {
@@ -35,9 +33,8 @@ router.get('/:pId', async (req, res) => {
   }
 });
 
-// Recupera todos los languages de ub job offer y devuelve JSON
+// get all languages from a joboffer
 router.get('/:pId', async (req, res) => {
-  // Id de skill inyectado por el Middleware checkToken!
   // console.log(req.job_skillId);
 
   try {
@@ -48,8 +45,8 @@ router.get('/:pId', async (req, res) => {
   }
 });
 
-// Crear un nuevo languages
-// Los datos para crear languages, me llegan a través del BODY
+// create new language
+
 router.post('/', async (req, res) => {
   try {
     const result = await create(req.body);
@@ -59,7 +56,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Borro un languages
+// delete a languages
 router.delete('/:idLanguages', async (req, res) => {
   try {
     const result = await deleteById(req.params.idLanguages);
@@ -69,7 +66,7 @@ router.delete('/:idLanguages', async (req, res) => {
   }
 });
 
-// Actualizo un languages
+// update a language
 router.put('/', async (req, res) => {
   try {
     const result = await updateById(req.body);
@@ -78,13 +75,5 @@ router.put('/', async (req, res) => {
     res.status(422).json({ error: error.message });
   }
 });
-
-//GET http://localhost:3000/users/userId
-
-//POST http://localhost:3000/users
-
-//PUT http://localhost:3000/users/userId
-
-//DELETE http://localhost:3000/users/userId
 
 module.exports = router;

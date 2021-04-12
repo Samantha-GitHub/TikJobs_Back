@@ -8,9 +8,8 @@ const {
 const router = require('express').Router();
 const { checkToken } = require('../middlewares');
 
-// Recupera todos los Profesional Experiences y devuelve JSON
+// get all profesional experience
 router.get('/:pId', async (req, res) => {
-  // Id de Profesional Experience inyectado por el Middleware checkToken!
   // console.log(req.job_offerId);
 
   try {
@@ -23,8 +22,8 @@ router.get('/:pId', async (req, res) => {
   }
 });
 
-// Crear un nuevo Profesional Experience
-// Los datos para crear Profesional Experience, me llegan a través del BODY
+// create new Profesional Experience
+
 router.post('/', checkToken, async (req, res) => {
   try {
     req.body.fk_usuario = req.userId;
@@ -35,7 +34,7 @@ router.post('/', checkToken, async (req, res) => {
   }
 });
 
-// Borro un Profesional Experience
+// delete a Profesional Experience
 router.delete('/:idProfesionalExperience', checkToken, async (req, res) => {
   try {
     const json = {
@@ -49,7 +48,7 @@ router.delete('/:idProfesionalExperience', checkToken, async (req, res) => {
   }
 });
 
-// Actualizo un Profesional Experience
+// update a Profesional Experience
 router.put('/', async (req, res) => {
   try {
     const result = await updateById(req.body);
@@ -58,13 +57,5 @@ router.put('/', async (req, res) => {
     res.status(422).json({ error: error.message });
   }
 });
-
-//GET http://localhost:3000/users/userId
-
-//POST http://localhost:3000/users
-
-//PUT http://localhost:3000/users/userId
-
-//DELETE http://localhost:3000/users/userId
 
 module.exports = router;
