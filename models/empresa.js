@@ -28,7 +28,7 @@ const getById = (pId) => {
   });
 };
 
-// GET Detalle del a Empresa que ha publicado una oferta
+// GET info of company that posted job offer
 /* const getCompanyDetailByJobOffer = (pId) => {
   return new Promise((resolve, reject) => {
     db.query(
@@ -119,8 +119,6 @@ const create = ({
   });
 };
 
-
-
 // UPDATE COMPANY
 const updateById = ({
   id,
@@ -138,7 +136,6 @@ const updateById = ({
   year_founded,
   password,
   username,
-
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
@@ -185,6 +182,6 @@ module.exports = {
   deleteById,
   getById,
   getJobOfferByIdCompany,
-  getByEmail
+  getByEmail,
   /* getCompanyDetailByJobOffer */
 };

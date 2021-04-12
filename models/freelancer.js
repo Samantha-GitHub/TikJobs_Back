@@ -32,7 +32,6 @@ const getById = (pId) => {
 let searchFreelance = (name) => {
   return new Promise((resolve, reject) => {
     const searchFreelance = `SELECT * FROM usuario WHERE firstname LIKE '%${name}%' OR lastname LIKE '%${name}%' OR email LIKE '%${name}%' OR country LIKE '%${name}%' OR city LIKE '%${name}%' OR job_title LIKE '%${name}%' `;
-    //searchValues = [search,search,search,search]
 
     db.query(searchFreelance, function (errQuery, resQuery) {
       if (errQuery) {

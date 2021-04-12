@@ -21,8 +21,8 @@ router.get('/:pId', async (req, res) => {
   }
 });
 
-// Crear un nuevo Education
-// Los datos para crear el Education, me llegan a través del BODY
+// create education
+// get data from body to create
 router.post('/', checkToken, async (req, res) => {
   try {
     req.body.fk_usuario = req.userId;
@@ -33,7 +33,7 @@ router.post('/', checkToken, async (req, res) => {
   }
 });
 
-// Borro un Education
+// DELETE a Education
 router.delete('/:idEducation', checkToken, async (req, res) => {
   try {
     const json = {
@@ -47,7 +47,7 @@ router.delete('/:idEducation', checkToken, async (req, res) => {
   }
 });
 
-// Actualizo un Education
+// UPDATE a Education
 router.put('/', async (req, res) => {
   try {
     const result = await updateById(req.body);
@@ -56,13 +56,5 @@ router.put('/', async (req, res) => {
     res.status(422).json({ error: error.message });
   }
 });
-
-//GET http://localhost:3000/users/userId
-
-//POST http://localhost:3000/users
-
-//PUT http://localhost:3000/users/userId
-
-//DELETE http://localhost:3000/users/userId
 
 module.exports = router;

@@ -66,7 +66,6 @@ const getByCountry = (pName) => {
 let searchData = (name) => {
   return new Promise((resolve, reject) => {
     const searchJob = `SELECT * FROM ofertas_trabajos WHERE country LIKE '%${name}%' OR city LIKE '%${name}%' OR function_department LIKE '%${name}%' `;
-    //searchValues = [search,search,search,search]
 
     db.query(searchJob, function (errQuery, resQuery) {
       if (errQuery) {

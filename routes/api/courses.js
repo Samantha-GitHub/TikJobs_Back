@@ -8,7 +8,7 @@ const {
 const router = require('express').Router();
 const { checkToken } = require('../middlewares');
 
-// Recupera todos los courses de un freelance y devuelve JSON
+// get all courses from a freelance
 router.get('/:pId', async (req, res) => {
   // Id de company inyectado por el Middleware checkToken!
   // console.log(req.courseId);
@@ -21,8 +21,8 @@ router.get('/:pId', async (req, res) => {
   }
 });
 
-// Crear un nuevo course
-// Los datos para crear el course, me llegan a través del BODY
+// create new course
+// create a course using body
 router.post('/', checkToken, async (req, res) => {
   try {
     req.body.fk_usuario = req.userId;
@@ -33,7 +33,7 @@ router.post('/', checkToken, async (req, res) => {
   }
 });
 
-// Borro un Course
+// delete a Course
 router.delete('/:idCourse', checkToken, async (req, res) => {
   try {
     const json = {
@@ -48,7 +48,7 @@ router.delete('/:idCourse', checkToken, async (req, res) => {
   }
 });
 
-// Actualizo un Course
+// update  Course
 router.put('/', async (req, res) => {
   try {
     const result = await updateById(req.body);
@@ -57,13 +57,5 @@ router.put('/', async (req, res) => {
     res.status(422).json({ error: error.message });
   }
 });
-
-//GET http://localhost:3000/users/userId
-
-//POST http://localhost:3000/users
-
-//PUT http://localhost:3000/users/userId
-
-//DELETE http://localhost:3000/users/userId
 
 module.exports = router;
