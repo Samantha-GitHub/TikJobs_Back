@@ -1,16 +1,18 @@
 /* Fichero de configuracion de BD mySQL */
 
 const mysql = require('mysql');
+require('dotenv').config();
+console.log(process.env);
 
 // Conectamos con la BD cuando arranque la applicacion
 
 /* const connect = () => {
   const pool = mysql.createPool({
-    host: '127.0.0.1',
-    user: 'root',
+    host: process.env.HOSTLOCAL,
+    user: process.env.USERLOCAL,
     password: '',
-    port: 3306,
-    database: 'tikjob',
+    port: process.env.PORTLOCAL,
+    database: process.env.DATABASELOCAL,
   });
 
   // gracias a  global., en cualquier parte de mi proyecto, si accedo a una variable db que acabo de crear, me va a recuperar el valor del pool
@@ -20,11 +22,11 @@ const mysql = require('mysql');
 
 const connect = () => {
   const pool = mysql.createPool({
-    host: 'eu-cdbr-west-01.cleardb.com',
-    user: 'b3498f608edc66',
-    password: '1c068d17',
-    port: 3306,
-    database: 'heroku_5363593fcd2cc93',
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    port: process.env.PORT,
+    database: process.env.DATABASE,
   });
 
   // gracias a  global., en cualquier parte de mi proyecto, si accedo a una variable db que acabo de crear, me va a recuperar el valor del pool
