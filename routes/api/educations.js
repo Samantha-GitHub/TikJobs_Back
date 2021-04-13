@@ -57,12 +57,5 @@ router.put('/', async (req, res) => {
   }
 });
 
-//GET http://localhost:3000/users/userId
-
-//POST http://localhost:3000/users
-
-//PUT http://localhost:3000/users/userId
-
-//DELETE http://localhost:3000/users/userId
 
 module.exports = router;
