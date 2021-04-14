@@ -2,6 +2,7 @@
 
 const mysql = require('mysql');
 require('dotenv').config();
+console.log(process.env.USERLOCAL);
 
 
 // Conectamos con la BD cuando arranque la applicacion
@@ -10,7 +11,7 @@ require('dotenv').config();
   const pool = mysql.createPool({
     host: process.env.HOSTLOCAL,
     user: process.env.USERLOCAL,
-    password: '',
+    password: process.env.PASSWORDLOCAL,
     port: process.env.PORTLOCAL,
     database: process.env.DATABASELOCAL,
   });
@@ -25,7 +26,7 @@ const connect = () => {
     host: process.env.HOST,
     user: process.env.USER,
     password: process.env.PASSWORD,
-    port: process.env.PORT,
+    port: process.env.PORTDATA,
     database: process.env.DATABASE,
   });
 
